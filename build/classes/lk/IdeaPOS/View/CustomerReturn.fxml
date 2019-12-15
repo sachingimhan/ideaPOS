@@ -79,7 +79,7 @@
             <Font name="Poppins SemiBold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="12.0" text="Customer Return" textFill="#455a64" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="12.0">
+      <Label layoutX="50.0" layoutY="12.0" text="Customer Return :" textFill="#455a64" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="12.0">
          <font>
             <Font name="Poppins Light" size="18.0" />
          </font>
@@ -138,5 +138,15 @@
             <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" lineSpacing="10.0" size="15" styleClass="icon" />
          </graphic>
       </Button>
+      <Label fx:id="lblBillDate" alignment="CENTER_RIGHT" layoutX="595.0" layoutY="13.0" prefHeight="27.0" prefWidth="195.0" textFill="#455a64" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblRetNo" layoutX="216.0" layoutY="13.0" prefHeight="27.0" prefWidth="178.0" textFill="#455a64">
+         <font>
+            <Font name="Poppins Light" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -187,3 +187,10 @@
 .label{
     -fx-text-fill:#ffffff;
 }
+.chart-title {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 1.6em;
+}
+.axis-label {
+  -fx-text-fill: #4682b4;
+}

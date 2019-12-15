@@ -175,3 +175,10 @@
     -fx-text-fill: #dcdde1;
     -fx-border-color: transparent;
 }
+.chart-title {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 1.6em;
+}
+.axis-label {
+  -fx-text-fill: #4682b4;
+}

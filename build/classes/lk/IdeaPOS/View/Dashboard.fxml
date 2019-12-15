@@ -93,7 +93,7 @@
             <left>
                 <VBox prefHeight="200.0" prefWidth="220.0" styleClass="subBackground-color" stylesheets="@../Resources/css/MainStyle.css" BorderPane.alignment="CENTER">
                     <children>
-                        <JFXButton alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" prefHeight="58.0" prefWidth="220.0" styleClass="mainMenuButton" stylesheets="@../Resources/css/MainStyle.css" text="Dashboard">
+                        <JFXButton fx:id="btnMainDashboard" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" onAction="#btnMainDashboard_OnAction" prefHeight="58.0" prefWidth="220.0" styleClass="mainMenuButton" stylesheets="@../Resources/css/MainStyle.css" text="Dashboard">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
@@ -170,7 +170,7 @@
                                 <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" />
                             </graphic>
                         </JFXButton>
-                        <JFXButton alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="10.0" layoutY="364.0" prefHeight="58.0" prefWidth="220.0" styleClass="mainMenuButton" stylesheets="@../Resources/css/MainStyle.css" text="Reports">
+                        <JFXButton fx:id="btnMainReport" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="10.0" layoutY="364.0" onAction="#btnMainReport_OnAction" prefHeight="58.0" prefWidth="220.0" styleClass="mainMenuButton" stylesheets="@../Resources/css/MainStyle.css" text="Reports">
                             <font>
                                 <Font name="Poppins SemiBold" size="15.0" />
                             </font>

@@ -137,19 +137,21 @@ public class GRNConfirmationController implements Initializable {
     private void btnConfirm_OnAction(ActionEvent event) {
         if (!tblGRNConfirmation.getItems().isEmpty()) {
             CheckSelectedCellValues();
-            boolean confirmGRN = false;
-            for (GRN grn : tblGRNConfirmation.getItems()) {
-                if (grn.isConformed()) {
-                    confirmGRN = confirmGRN(grn);
-                    if (!confirmGRN) {
-                        MessageBox.show(3, lblMessage, "Query Faild.!", MessageIconType.ERROR);
-                        return;
+            if (MessageBox.showConfMessage("Are you Sure?", "Confirmation")) {
+                boolean confirmGRN = false;
+                for (GRN grn : tblGRNConfirmation.getItems()) {
+                    if (grn.isConformed()) {
+                        confirmGRN = confirmGRN(grn);
+                        if (!confirmGRN) {
+                            MessageBox.show(3, lblMessage, "Query Faild.!", MessageIconType.ERROR);
+                            return;
+                        }
                     }
                 }
-            }
-            if (confirmGRN) {
-                MessageBox.show(3, lblMessage, "GRN has been Confirmed.!", MessageIconType.INFORMATION);
-                tblGRNConfirmation.setItems(loadUnConfirmedGrn(dtpGRNDate.getValue().format(DateTimeFormatter.ISO_DATE)));
+                if (confirmGRN) {
+                    MessageBox.show(3, lblMessage, "GRN has been Confirmed.!", MessageIconType.INFORMATION);
+                    tblGRNConfirmation.setItems(loadUnConfirmedGrn(dtpGRNDate.getValue().format(DateTimeFormatter.ISO_DATE)));
+                }
             }
         }
     }
@@ -189,7 +191,7 @@ public class GRNConfirmationController implements Initializable {
 
     private boolean updateItemQty(String itemCode, int Qty, double retail) {
         try {
-            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("UPDATE Item SET itemQty=?, retailPrice=? WHERE itemCode=?");
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("UPDATE Item SET itemQty=itemQty+?, costPrice=? WHERE itemCode=?");
             pst.setInt(1, Qty);
             pst.setDouble(2, retail);
             pst.setString(3, itemCode);

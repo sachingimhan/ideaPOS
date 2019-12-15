@@ -14,13 +14,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -44,6 +42,7 @@ import javafx.stage.StageStyle;
 import lk.IdeaPOS.Model.CustomerReturn;
 import lk.IdeaPOS.Model.Login;
 import lk.IdeaPOS.Model.OrderItem;
+import lk.IdeaPOS.Model.ReturnItem;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.Loader;
 import lk.IdeaPOS.Util.MessageBox;
@@ -103,6 +102,12 @@ public class CustomerReturnController implements Initializable {
     private OrderItem orderItem;
     @FXML
     private Button btnClear;
+    @FXML
+    private Label lblBillDate;
+    @FXML
+    private Label lblRetNo;
+
+    private String returnId;
 
     /**
      * Initializes the controller class.
@@ -118,6 +123,41 @@ public class CustomerReturnController implements Initializable {
         colSubTotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
         //
         initEditableoumn();
+        getReturnNo();
+    }
+
+    private void getReturnNo() {
+        String last = getLastOrderID();
+        if (last != null) {
+            String[] split = last.split("-");
+            int num = Integer.parseInt(split[1]);
+            num++;
+            if (num < 10) {
+                returnId = "RET-000" + num;
+            } else if (num < 100) {
+                returnId = "RET-00" + num;
+            } else if (num < 1000) {
+                returnId = "RET-0" + num;
+            } else {
+                returnId = "RET-" + num;
+            }
+        } else {
+            returnId = "RET-0001";
+        }
+        lblRetNo.setText(returnId);
+    }
+
+    private String getLastOrderID() {
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT retID FROM CustomerReturn ORDER BY retID DESC LIMIT 1");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
+        }
+        return null;
     }
 
     public void setLogin(Login login) {
@@ -222,12 +262,13 @@ public class CustomerReturnController implements Initializable {
 
     private void loadLastBill(String invNo) {
         try {
-            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT custID,netAmount FROM `Order` WHERE orderID=?");
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT custID,orderDate,netAmount FROM `Order` WHERE orderID=?");
             pst.setString(1, invNo);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
                 txtCustomerName.setText(rs.getString("custID"));
                 lblBillAmount.setText(rs.getString("netAmount"));
+                lblBillDate.setText(rs.getString("orderDate"));
             }
         } catch (ClassNotFoundException | SQLException ex) {
             MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
@@ -257,18 +298,17 @@ public class CustomerReturnController implements Initializable {
 
     private boolean insertReturnItem(CustomerReturn cr) {
         try {
-            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("INSERT INTO CustomerReturn (orderID,itemCode,userID,retDate,returnQty,unitPrice,totalAmount) VALUES(?,?,?,?,?,?,?)");
-            pst.setString(1, cr.getOrderID());
-            pst.setString(2, cr.getItemCode());
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("INSERT INTO CustomerReturn (retID,orderID,userID,retDate,billDate,totalAmount) VALUES(?,?,?,?,?,?)");
+            pst.setString(1, cr.getRetID());
+            pst.setString(2, cr.getOrderID());
             pst.setString(3, cr.getUserID());
             pst.setString(4, cr.getRetDate());
-            pst.setDouble(5, cr.getReturnQty());
-            pst.setDouble(6, cr.getUnitPrice());
-            pst.setDouble(7, cr.getTotalAmount());
+            pst.setString(5, cr.getBillDate());
+            pst.setDouble(6, cr.getTotalAmount());
             boolean flag = pst.executeUpdate() > 0;
             if (flag) {
-                boolean updateItemQty = updateItemQty(cr.getItemCode(), cr.getReturnQty());
-                if (!updateItemQty) {
+                boolean returnItem = returnItem(cr.getList());
+                if (!returnItem) {
                     return false;
                 }
             }
@@ -325,39 +365,62 @@ public class CustomerReturnController implements Initializable {
 
     @FXML
     private void btnReturn_OnAction(ActionEvent event) {
-        ObservableList<CustomerReturn> list = FXCollections.observableArrayList();
+        ObservableList<ReturnItem> list = FXCollections.observableArrayList();
         if (tblReturn.getItems().isEmpty() || txtInvoiceNo.getText().isEmpty()) {
             MessageBox.show(3, lblMessage, "There is No Items to Return.", MessageIconType.WARNING);
         } else if (MessageBox.showConfMessage("Are you Sure? Do you want to Return.", "Confirmation")) {
             for (int i = 0; i < tblReturn.getItems().size(); i++) {
                 OrderItem get = tblReturn.getItems().get(i);
-                list.add(new CustomerReturn(
-                        txtInvoiceNo.getText(),
-                        get.getItemCode(),
-                        login.getUserID(),
-                        LocalDate.now().toString(),
-                        Double.parseDouble(get.getQty()),
-                        get.getUnitPrice(),
-                        get.getSubTotal()
-                ));
+                list.add(new ReturnItem(returnId, get.getItemCode(), get.getUnitPrice(), Double.parseDouble(get.getQty()), get.getSubTotal()));
             }
-            boolean returnItem = returnItem(list);
+            boolean returnItem = insertReturnItem(new CustomerReturn(
+                    returnId,
+                    txtInvoiceNo.getText(),
+                    login.getUserID(),
+                    LocalDate.now().toString(),
+                    lblBillDate.getText(),
+                    Double.parseDouble(lblReturnAmount.getText()),
+                    list
+            ));
             if (returnItem) {
                 MessageBox.show(3, lblMessage, "Items has been Return to Store.!", MessageIconType.INFORMATION);
                 clear();
+                getReturnNo();
             }
         }
 
     }
 
-    private boolean returnItem(ObservableList<CustomerReturn> list) {
-        for (CustomerReturn cr : list) {
-            boolean flag = insertReturnItem(cr);
+    private boolean returnItem(ObservableList<ReturnItem> list) {
+        for (ReturnItem cr : list) {
+            boolean flag = insertReturnDetails(cr);
             if (!flag) {
                 return false;
             }
         }
         return true;
+    }
+
+    private boolean insertReturnDetails(ReturnItem item) {
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("INSERT INTO ReturnItem VALUES(?,?,?,?,?)");
+            pst.setString(1, item.getRetID());
+            pst.setString(2, item.getItemCode());
+            pst.setDouble(3, item.getUnitPrice());
+            pst.setDouble(4, item.getReturnQty());
+            pst.setDouble(5, item.getSubTotal());
+            boolean d = pst.executeUpdate() > 0;
+            if (d) {
+                boolean updateItemQty = updateItemQty(item.getItemCode(), item.getReturnQty());
+                if (!updateItemQty) {
+                    return false;
+                }
+            }
+            return d;
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.show(3, lblMessage, ex.getMessage(), MessageIconType.ERROR);
+        }
+        return false;
     }
 
     @FXML

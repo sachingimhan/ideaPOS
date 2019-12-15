@@ -5,39 +5,41 @@
  */
 package lk.IdeaPOS.Model;
 
+import javafx.collections.ObservableList;
+
 /**
  *
  * @author root
  */
 public class CustomerReturn {
- 
+
+    private String retID;
     private String orderID;
-    private String itemCode;
     private String userID;
     private String retDate;
-    private double returnQty;
-    private double unitPrice;
+    private String billDate;
     private double totalAmount;
+    private ObservableList<ReturnItem> list;
 
     public CustomerReturn() {
     }
 
-    public CustomerReturn(String orderID, String itemCode, String userID, String retDate, double returnQty, double unitPrice, double totalAmount) {
+    public CustomerReturn(String retID, String orderID, String userID, String retDate, String billDate, double totalAmount, ObservableList<ReturnItem> list) {
+        this.retID = retID;
         this.orderID = orderID;
-        this.itemCode = itemCode;
         this.userID = userID;
         this.retDate = retDate;
-        this.returnQty = returnQty;
-        this.unitPrice = unitPrice;
+        this.billDate = billDate;
         this.totalAmount = totalAmount;
+        this.list = list;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public String getRetID() {
+        return retID;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setRetID(String retID) {
+        this.retID = retID;
     }
 
     public String getOrderID() {
@@ -46,14 +48,6 @@ public class CustomerReturn {
 
     public void setOrderID(String orderID) {
         this.orderID = orderID;
-    }
-
-    public String getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
     }
 
     public String getUserID() {
@@ -72,26 +66,34 @@ public class CustomerReturn {
         this.retDate = retDate;
     }
 
-    public double getReturnQty() {
-        return returnQty;
+    public String getBillDate() {
+        return billDate;
     }
 
-    public void setReturnQty(double returnQty) {
-        this.returnQty = returnQty;
+    public void setBillDate(String billDate) {
+        this.billDate = billDate;
     }
 
-    public double getUnitPrice() {
-        return unitPrice;
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public ObservableList<ReturnItem> getList() {
+        return list;
+    }
+
+    public void setList(ObservableList<ReturnItem> list) {
+        this.list = list;
     }
 
     @Override
     public String toString() {
-        return "CustomerReturn{" + "orderID=" + orderID + ", itemCode=" + itemCode + ", userID=" + userID + ", retDate=" + retDate + ", returnQty=" + returnQty + ", unitPrice=" + unitPrice + ", totalAmount=" + totalAmount + '}';
+        return "CustomerReturn{" + "retID=" + retID + ", orderID=" + orderID + ", userID=" + userID + ", retDate=" + retDate + ", billDate=" + billDate + ", totalAmount=" + totalAmount + ", list=" + list + '}';
     }
-    
+
     
 }
