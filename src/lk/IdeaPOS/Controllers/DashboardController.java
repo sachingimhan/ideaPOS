@@ -20,8 +20,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -32,7 +30,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.IdeaPOS.Model.DatabaseSetting;
 import lk.IdeaPOS.Model.LoginDetail;
@@ -163,16 +160,16 @@ public class DashboardController implements Initializable {
     @FXML
     private void exitMainButton_OnAction(ActionEvent event) {
         if (MessageBox.showConfMessage("Do you want to Exit?", "Confirmation")) {
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        backupDb();
-//                    } catch (IOException | InterruptedException ex) {
-//                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
-//                }
-//            });
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        backupDb();
+                    } catch (IOException | InterruptedException ex) {
+                        MessageBox.showErrorMessage(ex.getLocalizedMessage(), "Error");
+                    }
+                }
+            });
             Platform.exit();
         }
 
@@ -270,7 +267,10 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void btnMainReport_OnAction(ActionEvent event) throws IOException {
-        report = new Loader().loadPage("View/ReportView.fxml");
+        FXMLLoader loadeFXML = new Loader().loadeFXML("View/ReportView.fxml");
+        report = loadeFXML.load();
+        ReportViewController controller = loadeFXML.<ReportViewController>getController();
+        controller.setLogin(login);
         new SlideInUp(report).play();
         rootMain.getChildren().setAll(report);
     }

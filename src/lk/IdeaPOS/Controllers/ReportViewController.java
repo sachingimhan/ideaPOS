@@ -14,14 +14,18 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.layout.AnchorPane;
 import lk.IdeaPOS.*;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
 import net.sf.jasperreports.engine.JRException;
@@ -52,6 +56,8 @@ public class ReportViewController implements Initializable {
     @FXML
     private JFXButton btnReport;
 
+    private LoginDetail login;
+
     /**
      * Initializes the controller class.
      */
@@ -67,6 +73,22 @@ public class ReportViewController implements Initializable {
         ObservableList<String> list = FXCollections.observableArrayList();
         list.addAll("Order Detail", "Sales Report", "GRN Report", "User Sales");
         cmbType.setItems(list);
+        cmbType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (cmbType.getSelectionModel().getSelectedIndex() == 3) {
+                    dtpFrom.setDisable(true);
+                    dtpTo.setDisable(true);
+                } else {
+                    dtpFrom.setDisable(false);
+                    dtpTo.setDisable(false);
+                }
+            }
+        });
+    }
+
+    public void setLogin(LoginDetail login) {
+        this.login = login;
     }
 
     private void loadRepote(Map<String, Object> parm, String report) {
@@ -85,6 +107,14 @@ public class ReportViewController implements Initializable {
     @FXML
     private void btnReport_OnAction(ActionEvent event) {
         if (cmbType.getSelectionModel().getSelectedItem() != null) {
+
+            if (cmbType.getSelectionModel().getSelectedIndex() == 3) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("userID", login.getUserID());
+                loadRepote(map, "rptUserSalseReport");
+                return;
+            }
+
             if (dtpFrom.getValue() != null && dtpTo.getValue() != null) {
                 if (cmbType.getSelectionModel().getSelectedIndex() == 0) {
                     Map<String, Object> map = new HashMap<>();
@@ -105,6 +135,7 @@ public class ReportViewController implements Initializable {
             } else {
                 MessageBox.showWarningMessage("Please Select From Date Or To Date.!", "Warning");
             }
+
         } else {
             MessageBox.showWarningMessage("Please Select Report Type.!", "Warning");
         }
