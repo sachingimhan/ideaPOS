@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="customer" prefHeight="555.0" prefWidth="804.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.CustomerController">
+   <children>
+      <Label layoutX="15.0" layoutY="12.0" text="Custome :" textFill="#455a64" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="12.0">
+         <font>
+            <Font name="Poppins SemiBold" size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblCustomer" layoutX="15.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#getSelectedData" prefHeight="179.0" prefWidth="701.0" stylesheets="@../Resources/css/MainStyle.css" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="263.0">
+         <columns>
+            <TableColumn fx:id="colID" minWidth="-1.0" prefWidth="124.0" text="Customer ID" />
+            <TableColumn fx:id="colFullName" minWidth="-1.0" prefWidth="204.0" text="Full Name" />
+            <TableColumn fx:id="colAddress" minWidth="-1.0" prefWidth="228.0" text="Address" />
+            <TableColumn fx:id="colContact" minWidth="-1.0" prefWidth="143.0" text="Contact No" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label fx:id="lblCustID" layoutX="125.0" layoutY="12.0" text="ID" textFill="#455a64" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="12.0">
+         <font>
+            <Font name="Poppins SemiBold" size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtFullName" labelFloat="true" layoutX="17.0" layoutY="58.0" prefHeight="30.0" prefWidth="701.0" promptText="Full Name" stylesheets="@../Resources/css/MainStyle.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="12.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtAddress" labelFloat="true" layoutX="15.0" layoutY="112.0" prefHeight="30.0" prefWidth="701.0" promptText="Address" stylesheets="@../Resources/css/MainStyle.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="12.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="15.0" layoutY="166.0" prefHeight="30.0" prefWidth="701.0" promptText="Contact" stylesheets="@../Resources/css/MainStyle.css" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="12.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSearch" layoutX="16.0" layoutY="512.0" prefHeight="33.0" prefWidth="354.0" promptText="Search" stylesheets="@../Resources/css/MainStyle.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="360.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btnClear" layoutX="17.0" layoutY="213.0" onAction="#btnClear_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="clear-btn" stylesheets="@../Resources/css/MainStyle.css" text="Clear" AnchorPane.leftAnchor="17.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnSave" layoutX="335.0" layoutY="213.0" onAction="#btnSave_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="save-btn" stylesheets="@../Resources/css/MainStyle.css" text="Save" AnchorPane.rightAnchor="275.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnUpdate" layoutX="466.0" layoutY="213.0" onAction="#btnUpdate_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="update-btn" stylesheets="@../Resources/css/MainStyle.css" text="Update" AnchorPane.rightAnchor="144.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnDelete" layoutX="596.0" layoutY="213.0" onAction="#btnDelete_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="delete-btn" stylesheets="@../Resources/css/MainStyle.css" text="Delete" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font name="Poppins Light" size="15.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="lblMessage" alignment="CENTER_RIGHT" layoutX="444.0" layoutY="26.0" prefHeight="28.0" prefWidth="327.0" textAlignment="RIGHT" textFill="#455a64" AnchorPane.rightAnchor="33.0">
+         <font>
+            <Font name="Poppins SemiBold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

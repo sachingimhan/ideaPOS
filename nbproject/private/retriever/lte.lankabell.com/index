@@ -1,0 +1,53 @@
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<html>
+    <head>
+        <title>Lanka Bell - Bell4G</title>
+        <meta charset="utf-8">
+        <link rel="icon" href="images//favicon.ico" type="image/x-icon">
+
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+        <!--<spring:url value="/resources/core/css/bootstrap.min.css" var="bootstrapCss" />-->
+        <link href="./resources/core/css/bootstrap.min.css" rel="stylesheet" />
+        <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+    </head>
+ 
+    <body> 
+        <br><br>
+        <div class="container-fluid bg-3 text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+            <div class="row">
+                <img src="images//Lanka_Bell_logo.png" />
+            </div>
+        </div><br><br><br>
+
+        
+
+        <div class="jumbotron  col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: window" >
+            <div class="container text-center" style="background-color: gainsboro; border-radius: 50px;color: black;">    
+                <br/>
+                <p>Dear Customer,<br> In order to enable the necessary services,<br> 
+                    please get additional data / settle your outstanding <br>
+            by logging into<!-- <a href="https://www.lankabell.com/lte" style="color: blue"></a>--> Lanka Bell Portal </p>
+                <form action="/CreateLog" method="post">
+                    <button class="btn btn-lg btn-primary" type="submit" > Login </button>
+                </form>
+                <p></p>
+            </div>
+        </div>
+
+<!--        <div class="container-fluid bg-3 text-center  col-lg-12 col-md-12 col-sm-12 col-xs-12">    
+            <div class="row">
+                
+            </div>
+        </div><br>-->
+
+    </body>
+</html>
+

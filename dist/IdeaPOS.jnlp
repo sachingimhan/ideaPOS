@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="IdeaPOS.jnlp">
+  <information>
+    <title>IdeaPOS</title>
+    <vendor>root</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="IdeaPOS.jar" size="112882" download="eager" />
+    <jar href="lib/AnimateFX-1.2.1.jar" size="94267" download="eager" />
+    <jar href="lib/barcode4j-2.1.jar" size="274404" download="eager" />
+    <jar href="lib/com-jaspersoft-ireport-components.jar" size="1910653" download="eager" />
+    <jar href="lib/com-jaspersoft-ireport-jasperserver.jar" size="1459780" download="eager" />
+    <jar href="lib/com-jaspersoft-ireport.jar" size="11848679" download="eager" />
+    <jar href="lib/com-jaspersoft-jrx.jar" size="84368" download="eager" />
+    <jar href="lib/commons-beanutils-1.8.2.jar" size="231891" download="eager" />
+    <jar href="lib/commons-collections-3.2.1.jar" size="575389" download="eager" />
+    <jar href="lib/commons-digester-2.1.jar" size="196768" download="eager" />
+    <jar href="lib/commons-javaflow-20060411.jar" size="96529" download="eager" />
+    <jar href="lib/commons-logging-1.1.jar" size="52592" download="eager" />
+    <jar href="lib/dom4j-1.6.jar" size="313359" download="eager" />
+    <jar href="lib/fontawesomefx-8.9.jar" size="571068" download="eager" />
+    <jar href="lib/groovy-all-2.0.1.jar" size="6191960" download="eager" />
+    <jar href="lib/iText-2.1.7.js2.jar" size="1130575" download="eager" />
+    <jar href="lib/iTextAsian.jar" size="331811" download="eager" />
+    <jar href="lib/jasper-compiler-jdt.jar" size="1395272" download="eager" />
+    <jar href="lib/jasperreports-5.0.1.jar" size="4218716" download="eager" />
+    <jar href="lib/jfoenix-8.0.8.jar" size="2708772" download="eager" />
+    <jar href="lib/log4j-1.2.15.jar" size="391834" download="eager" />
+    <jar href="lib/mariadb-java-client-2.5.2.jar" size="618816" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="IdeaPOS" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="lk.IdeaPOS.Main"  name="IdeaPOS" />
+  <update check="always"/>
+</jnlp>
