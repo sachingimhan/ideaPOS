@@ -17,8 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -111,7 +109,7 @@ public class POSSystemController implements Initializable {
     private double netAmount;
     private ObservableList<OrderItem> orderItems;
     private Login login;
-    private int itemQty;
+    private double itemQty;
 
     @FXML
     private Button btnReturn;
@@ -187,8 +185,8 @@ public class POSSystemController implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<OrderItem, String> event) {
                 event.getTableView().getItems().get(event.getTablePosition().getRow()).setQty(event.getNewValue());
-                if (Integer.parseInt(event.getNewValue()) > itemQty) {
-                    event.getTableView().getItems().get(event.getTablePosition().getRow()).setQty(Integer.toString(itemQty));
+                if (Double.parseDouble(event.getNewValue()) > itemQty) {
+                    event.getTableView().getItems().get(event.getTablePosition().getRow()).setQty(Double.toString(itemQty));
                 }
                 //update Table Column
                 double subtotal = 0;
@@ -277,15 +275,15 @@ public class POSSystemController implements Initializable {
                 itemQty = item.getItemQty();
                 for (int i = 0; i < tblPos.getItems().size(); i++) {
                     if (tblPos.getItems().get(i).getItemCode().equals(txtItemCode.getText())) {
-                        int ItemQty = Integer.parseInt(tblPos.getItems().get(i).getQty()) + 1;
+                        double ItemQty = Double.parseDouble(tblPos.getItems().get(i).getQty()) + 1.0;
                         double subTotal = 0;
                         if (item.getDiscount() != 0.0) {
                             subTotal = (tblPos.getItems().get(i).getUnitPrice() - item.getDiscount()) * ItemQty;
                         } else {
                             subTotal = ItemQty * tblPos.getItems().get(i).getUnitPrice();
                         }
-                        if (Integer.parseInt(tblPos.getItems().get(i).getQty()) < itemQty) {
-                            tblPos.getItems().set(i, new OrderItem(orderID, item.getItemCode(), item.getItemName(), item.getRetailPrice(), Integer.toString(ItemQty), item.getDiscount(), subTotal));
+                        if (Double.parseDouble(tblPos.getItems().get(i).getQty()) < itemQty) {
+                            tblPos.getItems().set(i, new OrderItem(orderID, item.getItemCode(), item.getItemName(), item.getRetailPrice(), Double.toString(ItemQty), item.getDiscount(), subTotal));
                         }
                         found = true;
                     }
@@ -297,7 +295,7 @@ public class POSSystemController implements Initializable {
                     } else {
                         subTotal = item.getRetailPrice() * 1;
                     }
-                    tblPos.getItems().add(new OrderItem(orderID, item.getItemCode(), item.getItemName(), item.getRetailPrice(), "1", item.getDiscount(), subTotal));
+                    tblPos.getItems().add(new OrderItem(orderID, item.getItemCode(), item.getItemName(), item.getRetailPrice(), "1.0", item.getDiscount(), subTotal));
                 }
 
             } else {
@@ -418,7 +416,7 @@ public class POSSystemController implements Initializable {
             pst.setString(2, item.getItemCode());
             pst.setString(3, item.getDescription());
             pst.setDouble(4, item.getUnitPrice());
-            pst.setInt(5, Integer.parseInt(item.getQty()));
+            pst.setDouble(5, Double.parseDouble(item.getQty()));
             pst.setDouble(6, item.getDiscount());
             pst.setDouble(7, item.getSubTotal());
             boolean flag = pst.executeUpdate() > 0;
@@ -438,7 +436,7 @@ public class POSSystemController implements Initializable {
     private boolean updateStock(String ItemCode, String qty) {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("UPDATE Item SET itemQty=itemQty-? WHERE itemCode=?");
-            pst.setInt(1, Integer.parseInt(qty));
+            pst.setDouble(1, Double.parseDouble(qty));
             pst.setString(2, ItemCode);
             return pst.executeUpdate() > 0;
         } catch (ClassNotFoundException | SQLException ex) {

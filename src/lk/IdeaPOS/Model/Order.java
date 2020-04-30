@@ -28,6 +28,11 @@ public class Order {
     public Order() {
     }
 
+    public Order(String custID, double netAmount) {
+        this.custID = custID;
+        this.netAmount = netAmount;
+    }
+    
     public Order(String orderID, String custID, String userID, String orderDate, String paymentMethod, double grossAmount, double netAmount, double cash, double balance, ObservableList<OrderItem> orderItems) {
         this.orderID = orderID;
         this.custID = custID;

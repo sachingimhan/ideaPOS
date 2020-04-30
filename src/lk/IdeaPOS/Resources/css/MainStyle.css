@@ -1,5 +1,7 @@
 /*
  * Light Theme
+ * #750b53
+ * #8100b1 -
  */
 
 .jfx-text-field{
@@ -95,7 +97,7 @@
 }
 .setting-Button:hover{
     -fx-background-color: #03A9F4;
-    
+
 }
 .save-btn{
     -fx-background-color:#27ae60;
