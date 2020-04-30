@@ -481,7 +481,10 @@ public class POSSystemController implements Initializable {
             new SlideInUp(custReturn).play();
             custReturn.toFront();
         } else {
-            custReturn = new Loader().loadPage("View/CustomerReturn.fxml");
+            FXMLLoader loadeFXML = new Loader().loadeFXML("View/CustomerReturn.fxml");
+            custReturn = loadeFXML.load();
+            CustomerReturnController controller = loadeFXML.<CustomerReturnController>getController();
+            controller.setLogin(login);
             new SlideInUp(custReturn).play();
             root.getChildren().add(custReturn);
         }
@@ -504,18 +507,19 @@ public class POSSystemController implements Initializable {
             } else {
                 payment = rbCardPay.getText();
             }
-
-            for (int i = 0; i < tblPos.getItems().size(); i++) {
-                OrderItem get = tblPos.getItems().get(i);
-                orderItems.add(new OrderItem(
-                        lblOrderID.getText(),
-                        get.getItemCode(),
-                        get.getDescription(),
-                        get.getUnitPrice(),
-                        get.getQty(),
-                        get.getDiscount(),
-                        get.getSubTotal()
-                ));
+            if (MessageBox.showConfMessage("Are you sure do you want to complete transaction", "Confirmation")) {
+                for (int i = 0; i < tblPos.getItems().size(); i++) {
+                    OrderItem get = tblPos.getItems().get(i);
+                    orderItems.add(new OrderItem(
+                            lblOrderID.getText(),
+                            get.getItemCode(),
+                            get.getDescription(),
+                            get.getUnitPrice(),
+                            get.getQty(),
+                            get.getDiscount(),
+                            get.getSubTotal()
+                    ));
+                }
             }
             // Insert Order
             boolean insertOrder;
@@ -539,9 +543,7 @@ public class POSSystemController implements Initializable {
             } catch (ClassNotFoundException | SQLException ex) {
                 MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
             }
-
         }
-
     }
 
     private void deleteTableItem() {

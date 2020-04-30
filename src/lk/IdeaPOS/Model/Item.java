@@ -16,14 +16,14 @@ public class Item {
     private double costPrice;
     private double retailPrice;
     private double wholeSalePrice;
-    private int itemQty;
+    private double itemQty;
     private double discount;
     private int reorderLevel;
 
     public Item() {
     }
 
-    public Item(String itemCode, String itemName, double costPrice, double retailPrice, double wholeSalePrice, int itemQty, int reorderLevel) {
+    public Item(String itemCode, String itemName, double costPrice, double retailPrice, double wholeSalePrice, double itemQty, int reorderLevel) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.costPrice = costPrice;
@@ -33,7 +33,7 @@ public class Item {
         this.reorderLevel = reorderLevel;
     }
 
-    public Item(String itemCode, String itemName, double costPrice, double retailPrice, double wholeSalePrice, int itemQty, double discount, int reorderLevel) {
+    public Item(String itemCode, String itemName, double costPrice, double retailPrice, double wholeSalePrice, double itemQty, double discount, int reorderLevel) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.costPrice = costPrice;
@@ -44,7 +44,7 @@ public class Item {
         this.reorderLevel = reorderLevel;
     }
     
-    public Item(String itemCode, String itemName, double retailPrice, double discount, int itemQty) {
+    public Item(String itemCode, String itemName, double retailPrice, double discount, double itemQty) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.retailPrice = retailPrice;
@@ -99,11 +99,11 @@ public class Item {
         this.wholeSalePrice = wholeSalePrice;
     }
 
-    public int getItemQty() {
+    public double getItemQty() {
         return itemQty;
     }
 
-    public void setItemQty(int itemQty) {
+    public void setItemQty(double itemQty) {
         this.itemQty = itemQty;
     }
 

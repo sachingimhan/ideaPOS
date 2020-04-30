@@ -114,11 +114,6 @@
             <Font name="Poppins SemiBold" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="lblDate" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="617.0" layoutY="14.0" prefHeight="30.0" prefWidth="175.0" text="0000-00-00" textAlignment="RIGHT" textFill="#455a64" visible="false">
-         <font>
-            <Font name="Poppins SemiBold" size="18.0" />
-         </font>
-      </Label>
       <Button fx:id="btnReturn" graphicTextGap="5.0" layoutX="668.0" layoutY="484.0" lineSpacing="5.0" mnemonicParsing="false" onAction="#btnReturn_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="update-btn" stylesheets="@../Resources/css/MainStyle.css" text="Return" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="16.0">
          <font>
             <Font name="Poppins SemiBold" size="15.0" />

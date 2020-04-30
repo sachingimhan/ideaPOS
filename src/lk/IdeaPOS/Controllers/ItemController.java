@@ -117,7 +117,7 @@ public class ItemController implements Initializable {
                         rs.getDouble("costPrice"),
                         rs.getDouble("retailPrice"),
                         rs.getDouble("wholeSalePrice"),
-                        rs.getInt("itemQty"),
+                        rs.getDouble("itemQty"),
                         rs.getInt("reorderLevel")
                 ));
             }
@@ -156,7 +156,7 @@ public class ItemController implements Initializable {
             pst.setDouble(3, itm.getCostPrice());
             pst.setDouble(4, itm.getRetailPrice());
             pst.setDouble(5, itm.getWholeSalePrice());
-            pst.setInt(6, itm.getItemQty());
+            pst.setDouble(6, itm.getItemQty());
             pst.setInt(7, itm.getReorderLevel());
             return pst.executeUpdate() > 0;
         } catch (ClassNotFoundException | SQLException ex) {
@@ -191,7 +191,7 @@ public class ItemController implements Initializable {
                         rs.getDouble("costPrice"),
                         rs.getDouble("retailPrice"),
                         rs.getDouble("wholeSalePrice"),
-                        rs.getInt("itemQty"),
+                        rs.getDouble("itemQty"),
                         rs.getInt("reorderLevel")
                 ));
             }
@@ -280,7 +280,7 @@ public class ItemController implements Initializable {
                     Double.parseDouble(txtCostPrice.getText()),
                     Double.parseDouble(txtRetailPrice.getText()),
                     Double.parseDouble(txtWholeSalePrice.getText()),
-                    Integer.parseInt(txtItemQty.getText()),
+                    Double.parseDouble(txtItemQty.getText()),
                     Integer.parseInt(txtReorderLevel.getText())
             ));
             if (flag) {
@@ -314,7 +314,7 @@ public class ItemController implements Initializable {
                     Double.parseDouble(txtCostPrice.getText()),
                     Double.parseDouble(txtRetailPrice.getText()),
                     Double.parseDouble(txtWholeSalePrice.getText()),
-                    Integer.parseInt(txtItemQty.getText()),
+                    Double.parseDouble(txtItemQty.getText()),
                     Integer.parseInt(txtReorderLevel.getText())
             ));
             if (flag) {

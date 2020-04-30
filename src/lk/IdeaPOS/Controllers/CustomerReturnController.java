@@ -13,6 +13,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,7 +24,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -35,8 +39,13 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import lk.IdeaPOS.Model.CustomerReturn;
+import lk.IdeaPOS.Model.Login;
 import lk.IdeaPOS.Model.OrderItem;
 import lk.IdeaPOS.Util.DBUtil;
+import lk.IdeaPOS.Util.Loader;
 import lk.IdeaPOS.Util.MessageBox;
 import lk.IdeaPOS.Util.MessageIconType;
 
@@ -76,8 +85,6 @@ public class CustomerReturnController implements Initializable {
     @FXML
     private Label lblBalance;
     @FXML
-    private Label lblDate;
-    @FXML
     private Button btnReturn;
     @FXML
     private Button btnBack;
@@ -92,6 +99,7 @@ public class CustomerReturnController implements Initializable {
     @FXML
     private JFXTextField txtInvoiceNo;
 
+    private Login login;
     private OrderItem orderItem;
     @FXML
     private Button btnClear;
@@ -110,6 +118,10 @@ public class CustomerReturnController implements Initializable {
         colSubTotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
         //
         initEditableoumn();
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     private ObservableList<OrderItem> loadInvoice(String orderID) {
@@ -167,40 +179,45 @@ public class CustomerReturnController implements Initializable {
     }
 
     private void loadReturnItem(String itemCode) {
-        orderItem = tmp.stream().filter(e -> e.getItemCode().equals(itemCode)).findAny().get();
-        boolean found = false;
-        if (orderItem != null) {
-            for (int i = 0; i < tblReturn.getItems().size(); i++) {
-                if (tblReturn.getItems().get(i).getItemCode().equals(orderItem.getItemCode())) {
-                    double ItemQty = Double.parseDouble(tblReturn.getItems().get(i).getQty()) + 1.0;
+        try {
+            orderItem = tmp.stream().filter(e -> e.getItemCode().equals(itemCode)).findAny().get();
+            boolean found = false;
+            if (orderItem != null) {
+                for (int i = 0; i < tblReturn.getItems().size(); i++) {
+                    if (tblReturn.getItems().get(i).getItemCode().equals(orderItem.getItemCode())) {
+                        double ItemQty = Double.parseDouble(tblReturn.getItems().get(i).getQty()) + 1.0;
+                        double subTotal = 0;
+                        if (orderItem.getDiscount() != 0.0) {
+                            subTotal = (tblReturn.getItems().get(i).getUnitPrice() - orderItem.getDiscount()) * ItemQty;
+                        } else {
+                            subTotal = ItemQty * tblReturn.getItems().get(i).getUnitPrice();
+                        }
+                        if (Double.parseDouble(tblReturn.getItems().get(i).getQty()) < Double.parseDouble(orderItem.getQty())) {
+                            tblReturn.getItems().set(i, new OrderItem(txtInvoiceNo.getText(), orderItem.getItemCode(), orderItem.getDescription(), orderItem.getUnitPrice(), Double.toString(ItemQty), orderItem.getDiscount(), subTotal));
+                        }
+                        found = true;
+                    }
+                }
+                if (!found) {
                     double subTotal = 0;
                     if (orderItem.getDiscount() != 0.0) {
-                        subTotal = (tblReturn.getItems().get(i).getUnitPrice() - orderItem.getDiscount()) * ItemQty;
+                        subTotal = (orderItem.getUnitPrice() - orderItem.getDiscount()) * 1;
                     } else {
-                        subTotal = ItemQty * tblReturn.getItems().get(i).getUnitPrice();
+                        subTotal = orderItem.getUnitPrice() * 1;
                     }
-                    if (Double.parseDouble(tblReturn.getItems().get(i).getQty()) < Double.parseDouble(orderItem.getQty())) {
-                        tblReturn.getItems().set(i, new OrderItem(txtInvoiceNo.getText(), orderItem.getItemCode(), orderItem.getDescription(), orderItem.getUnitPrice(), Double.toString(ItemQty), orderItem.getDiscount(), subTotal));
-                    }
-                    found = true;
+                    tblReturn.getItems().add(new OrderItem(txtInvoiceNo.getText(), orderItem.getItemCode(), orderItem.getDescription(), orderItem.getUnitPrice(), "1.0", orderItem.getDiscount(), subTotal));
                 }
-            }
-            if (!found) {
-                double subTotal = 0;
-                if (orderItem.getDiscount() != 0.0) {
-                    subTotal = (orderItem.getUnitPrice() - orderItem.getDiscount()) * 1;
-                } else {
-                    subTotal = orderItem.getUnitPrice() * 1;
-                }
-                tblReturn.getItems().add(new OrderItem(txtInvoiceNo.getText(), orderItem.getItemCode(), orderItem.getDescription(), orderItem.getUnitPrice(), "1.0", orderItem.getDiscount(), subTotal));
-            }
 
-        } else {
-            MessageBox.show(3, lblMessage, "Item Not Found.!", MessageIconType.WARNING);
+            } else {
+                MessageBox.show(3, lblMessage, "Item Not Found.!", MessageIconType.WARNING);
+            }
+        } catch (Exception ex) {
+            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
+        } finally {
+            calSubTotal();
+            txtItemCode.setText("");
+            txtItemCode.requestFocus();
         }
-        calSubTotal();
-        txtItemCode.setText("");
-        txtItemCode.requestFocus();
     }
 
     private void loadLastBill(String invNo) {
@@ -237,14 +254,51 @@ public class CustomerReturnController implements Initializable {
             calSubTotal();
         }
     }
-    
-    private void clear(){
+
+    private boolean insertReturnItem(CustomerReturn cr) {
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("INSERT INTO CustomerReturn (orderID,itemCode,userID,retDate,returnQty,unitPrice,totalAmount) VALUES(?,?,?,?,?,?,?)");
+            pst.setString(1, cr.getOrderID());
+            pst.setString(2, cr.getItemCode());
+            pst.setString(3, cr.getUserID());
+            pst.setString(4, cr.getRetDate());
+            pst.setDouble(5, cr.getReturnQty());
+            pst.setDouble(6, cr.getUnitPrice());
+            pst.setDouble(7, cr.getTotalAmount());
+            boolean flag = pst.executeUpdate() > 0;
+            if (flag) {
+                boolean updateItemQty = updateItemQty(cr.getItemCode(), cr.getReturnQty());
+                if (!updateItemQty) {
+                    return false;
+                }
+            }
+            return flag;
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
+        }
+        return false;
+    }
+
+    private boolean updateItemQty(String itemCode, double returnQty) {
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("UPDATE Item SET itemQty=itemQty+? WHERE itemCode=?");
+            pst.setDouble(1, returnQty);
+            pst.setString(2, itemCode);
+            return pst.executeUpdate() > 0;
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
+        }
+        return false;
+    }
+
+    private void clear() {
         txtCustomerName.setText("");
         txtInvoiceNo.setText("");
         txtItemCode.setText("");
         lblBalance.setText("0.0");
         lblBillAmount.setText("0.0");
         lblReturnAmount.setText("0.0");
+        tblReturn.getItems().clear();
     }
 
     @FXML
@@ -269,30 +323,79 @@ public class CustomerReturnController implements Initializable {
         loadReturnItem(txtItemCode.getText());
     }
 
-
     @FXML
     private void btnReturn_OnAction(ActionEvent event) {
+        ObservableList<CustomerReturn> list = FXCollections.observableArrayList();
+        if (tblReturn.getItems().isEmpty() || txtInvoiceNo.getText().isEmpty()) {
+            MessageBox.show(3, lblMessage, "There is No Items to Return.", MessageIconType.WARNING);
+        } else if (MessageBox.showConfMessage("Are you Sure? Do you want to Return.", "Confirmation")) {
+            for (int i = 0; i < tblReturn.getItems().size(); i++) {
+                OrderItem get = tblReturn.getItems().get(i);
+                list.add(new CustomerReturn(
+                        txtInvoiceNo.getText(),
+                        get.getItemCode(),
+                        login.getUserID(),
+                        LocalDate.now().toString(),
+                        Double.parseDouble(get.getQty()),
+                        get.getUnitPrice(),
+                        get.getSubTotal()
+                ));
+            }
+            boolean returnItem = returnItem(list);
+            if (returnItem) {
+                MessageBox.show(3, lblMessage, "Items has been Return to Store.!", MessageIconType.INFORMATION);
+                clear();
+            }
+        }
+
+    }
+
+    private boolean returnItem(ObservableList<CustomerReturn> list) {
+        for (CustomerReturn cr : list) {
+            boolean flag = insertReturnItem(cr);
+            if (!flag) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @FXML
     private void btnItemCode_OnAction(ActionEvent event) {
+        try {
+            FXMLLoader itemFilter = new Loader().loadeFXML("View/GRNItemSearch.fxml");
+            Parent root = itemFilter.load();
+            GRNItemSearchController controller = itemFilter.<GRNItemSearchController>getController();
+            Stage stage = new Stage(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
+            stage.showAndWait();
+            txtItemCode.setText(controller.getItem().getItemCode());
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerReturnController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void txtInvoiceNo_OnAction(ActionEvent event) {
-        ObservableList<OrderItem> loadInvoice = loadInvoice(txtInvoiceNo.getText());
-        loadLastBill(txtInvoiceNo.getText());
-        if (loadInvoice != null) {
-            tmp = loadInvoice;
-            txtItemCode.requestFocus();
-        } else {
-            MessageBox.show(3, lblMessage, "Invoice Not Found.!", MessageIconType.ERROR);
+        try {
+            ObservableList<OrderItem> loadInvoice = loadInvoice(txtInvoiceNo.getText());
+            loadLastBill(txtInvoiceNo.getText());
+            if (loadInvoice != null) {
+                tmp = loadInvoice;
+                txtItemCode.requestFocus();
+            } else {
+                MessageBox.show(3, lblMessage, "Invoice Not Found.!", MessageIconType.ERROR);
+            }
+        } catch (Exception ex) {
+            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
         }
 
     }
 
     @FXML
     private void btnClear_OnAction(ActionEvent event) {
+        clear();
     }
 
 }
