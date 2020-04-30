@@ -34,6 +34,12 @@ public class HomeController implements Initializable {
     private NumberAxis ySales;
     @FXML
     private CategoryAxis xMonth;
+    @FXML
+    private Label lblOrderCount;
+    @FXML
+    private Label lblReturnCount;
+    @FXML
+    private Label lblReorderlvl;
 
     /**
      * Initializes the controller class.

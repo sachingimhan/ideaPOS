@@ -96,7 +96,7 @@ public class SupplierController implements Initializable {
             tblSupplier.setItems(searchSupplier(newValue));
         });
     }
-
+    
     private ObservableList<Supplier> searchSupplier(String filter) {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT * FROM Supplier WHERE CONCAT(supplierID,name,contact) LIKE '%" + filter + "%'");
