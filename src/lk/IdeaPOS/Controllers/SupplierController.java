@@ -23,7 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.IdeaPOS.Model.Login;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Model.Supplier;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
@@ -69,7 +69,7 @@ public class SupplierController implements Initializable {
     @FXML
     private Label lblMessage;
 
-    private Login login;
+    private LoginDetail login;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -100,7 +100,7 @@ public class SupplierController implements Initializable {
         });
     }
     
-    public void setLogin(Login login) {
+    public void setLogin(LoginDetail login) {
         this.login = login;
         if (!this.login.getRole().equals("Administrator")) {
             btnSupplierUpdate.setDisable(true);

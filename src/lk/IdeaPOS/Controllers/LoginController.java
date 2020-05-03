@@ -26,7 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import lk.IdeaPOS.Model.Login;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.Loader;
 import lk.IdeaPOS.Util.MessageBox;
@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
     @FXML
     private Label lblError;
 
-    private Login checkLogin;
+    private LoginDetail checkLogin;
     @FXML
     private AnchorPane AnchorLogin;
 
@@ -104,7 +104,7 @@ public class LoginController implements Initializable {
 
     }
 
-    private void setLogin(Login login) throws IOException {
+    private void setLogin(LoginDetail login) throws IOException {
         FXMLLoader loadeFXML = new Loader().loadeFXML("View/Dashboard.fxml");
         StackPane load = loadeFXML.load();
         loginStack.getChildren().add(load);
@@ -117,14 +117,14 @@ public class LoginController implements Initializable {
         txtUserName.setText("");
     }
 
-    private Login checkLogin(String useName, String password) {
+    private LoginDetail checkLogin(String useName, String password) {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT u.userID,u.userName,l.role,l.activeState FROM User u,LoginDetail l WHERE u.userID=l.userID AND l.userName=? AND l.password=md5(?)");
             pst.setString(1, useName);
             pst.setString(2, password);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return new Login(rs.getString("userID"), rs.getString("userName"), rs.getString("role"), rs.getBoolean("activeState"));
+                return new LoginDetail(rs.getString("userID"), rs.getString("userName"), rs.getString("role"), rs.getBoolean("activeState"));
             }
         } catch (ClassNotFoundException | SQLException ex) {
             MessageBox.show(3, lblError, ex.getLocalizedMessage(), MessageIconType.ERROR);

@@ -9,23 +9,32 @@ package lk.IdeaPOS.Model;
  *
  * @author root
  */
-public class Login {
+public class LoginDetail {
 
     private String userID;
     private String userName;
+    private String password;
     private String role;
     private boolean activeState;
 
-    public Login() {
+    public LoginDetail() {
     }
 
-    public Login(String userID, String userName, String role, boolean activeState) {
+    public LoginDetail(String userID, String userName, String role, boolean activeState) {
         this.userID = userID;
         this.userName = userName;
         this.role = role;
         this.activeState = activeState;
     }
 
+    public LoginDetail(String userID, String userName, String password, String role, boolean activeState) {
+        this.userID = userID;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.activeState = activeState;
+    }
+    
     public String getUserID() {
         return userID;
     }
@@ -58,9 +67,17 @@ public class Login {
         this.activeState = activeState;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
-        return "Login{" + "userID=" + userID + ", userName=" + userName + ", role=" + role + ", activeState=" + activeState + '}';
+        return "Login{" + "userID=" + userID + ", userName=" + userName + ", password=" + password + ", role=" + role + ", activeState=" + activeState + '}';
     }
 
 }

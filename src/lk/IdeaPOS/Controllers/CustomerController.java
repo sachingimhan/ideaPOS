@@ -26,7 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.IdeaPOS.Model.Customer;
-import lk.IdeaPOS.Model.Login;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
 
@@ -73,7 +73,7 @@ public class CustomerController implements Initializable {
     @FXML
     private Label lblMessage;
 
-    private Login login;
+    private LoginDetail login;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,7 +105,7 @@ public class CustomerController implements Initializable {
 
     }
 
-    public void setLogin(Login login) {
+    public void setLogin(LoginDetail login) {
         this.login = login;
         if (!this.login.getRole().equals("Administrator")) {
             btnUpdate.setDisable(true);

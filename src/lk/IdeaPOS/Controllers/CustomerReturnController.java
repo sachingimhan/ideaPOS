@@ -40,7 +40,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.IdeaPOS.Model.CustomerReturn;
-import lk.IdeaPOS.Model.Login;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Model.OrderItem;
 import lk.IdeaPOS.Model.ReturnItem;
 import lk.IdeaPOS.Util.DBUtil;
@@ -98,7 +98,7 @@ public class CustomerReturnController implements Initializable {
     @FXML
     private JFXTextField txtInvoiceNo;
 
-    private Login login;
+    private LoginDetail login;
     private OrderItem orderItem;
     @FXML
     private Button btnClear;
@@ -160,7 +160,7 @@ public class CustomerReturnController implements Initializable {
         return null;
     }
 
-    public void setLogin(Login login) {
+    public void setLogin(LoginDetail login) {
         this.login = login;
     }
 

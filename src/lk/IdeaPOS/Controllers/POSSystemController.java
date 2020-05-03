@@ -44,7 +44,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.IdeaPOS.Model.Item;
-import lk.IdeaPOS.Model.Login;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Model.Order;
 import lk.IdeaPOS.Model.OrderItem;
 import lk.IdeaPOS.Util.DBUtil;
@@ -108,7 +108,7 @@ public class POSSystemController implements Initializable {
 
     private double netAmount;
     private ObservableList<OrderItem> orderItems;
-    private Login login;
+    private LoginDetail login;
     private double itemQty;
 
     @FXML
@@ -224,7 +224,7 @@ public class POSSystemController implements Initializable {
         getInvoiceNo();
     }
 
-    public void setLogin(Login login) {
+    public void setLogin(LoginDetail login) {
         this.login = login;
     }
 

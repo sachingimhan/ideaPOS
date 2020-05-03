@@ -34,7 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lk.IdeaPOS.Model.GRN;
-import lk.IdeaPOS.Model.Login;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.Loader;
 import lk.IdeaPOS.Util.MessageBox;
@@ -109,7 +109,7 @@ public class GRNController implements Initializable {
     @FXML
     private Label lblMessage;
 
-    private Login login;
+    private LoginDetail login;
 
     /**
      * Initializes the controller class.
@@ -168,7 +168,7 @@ public class GRNController implements Initializable {
         });
     }
 
-    public void setLogin(Login login) {
+    public void setLogin(LoginDetail login) {
         this.login = login;
         if (!this.login.getRole().equals("Administrator")) {
             btnUpdate.setDisable(true);

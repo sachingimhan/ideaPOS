@@ -25,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.IdeaPOS.Model.Login;
+import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Util.Loader;
 import lk.IdeaPOS.Util.MessageBox;
 
@@ -57,7 +57,7 @@ public class DashboardController implements Initializable {
     @FXML
     private Label lblUserStatus;
 
-    private Login login;
+    private LoginDetail login;
     @FXML
     private JFXButton btnMainPOS;
     @FXML
@@ -89,7 +89,7 @@ public class DashboardController implements Initializable {
         timeline.play();
     }
 
-    public void setLogin(Login login) {
+    public void setLogin(LoginDetail login) {
         this.login = login;
         lblUserStatus.setText("User : " + login.getUserName() + "  Role : " + login.getRole());
         if (!this.login.getRole().equals("Administrator")) {
@@ -99,7 +99,7 @@ public class DashboardController implements Initializable {
         }
     }
 
-    public Login getLogin() {
+    public LoginDetail getLogin() {
         return login;
     }
 
@@ -163,9 +163,13 @@ public class DashboardController implements Initializable {
         window.setIconified(true);
     }
 
+    AnchorPane setting;
     @FXML
-    private void btnSetting_OnAction(ActionEvent event) {
-
+    private void btnSetting_OnAction(ActionEvent event) throws IOException {
+        FXMLLoader loadeFXML = new Loader().loadeFXML("View/Settings.fxml");
+        setting=loadeFXML.load();
+        new SlideInRight(setting).play();
+        rootMain.getChildren().setAll(setting);
     }
     private StackPane poss;
 
