@@ -92,6 +92,11 @@ public class DashboardController implements Initializable {
     public void setLogin(Login login) {
         this.login = login;
         lblUserStatus.setText("User : " + login.getUserName() + "  Role : " + login.getRole());
+        if (!this.login.getRole().equals("Administrator")) {
+            btnMainConfirmation.setDisable(true);
+            btnMainDiscount.setDisable(true);
+            btnSetting.setDisable(true);
+        }
     }
 
     public Login getLogin() {
@@ -102,7 +107,10 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void btnMainCustomer_onAction(ActionEvent event) throws IOException {
-        customer = new Loader().loadPage("View/Customer.fxml");
+        FXMLLoader loadeFXML = new Loader().loadeFXML("View/Customer.fxml");
+        customer = loadeFXML.load();
+        CustomerController controller = loadeFXML.<CustomerController>getController();
+        controller.setLogin(login);
         new SlideInRight(customer).play();
         rootMain.getChildren().setAll(customer);
 
@@ -111,7 +119,10 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void btnMainSuppliers_OnActin(ActionEvent event) throws IOException {
-        supplier = new Loader().loadPage("View/Supplier.fxml");
+        FXMLLoader loadeFXML = new Loader().loadeFXML("View/Supplier.fxml");
+        supplier = loadeFXML.load();
+        SupplierController controller=loadeFXML.<SupplierController>getController();
+        controller.setLogin(login);
         new SlideInUp(supplier).play();
         rootMain.getChildren().setAll(supplier);
 
@@ -120,8 +131,10 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void btnMainItem_OnAction(ActionEvent event) throws IOException {
-
-        item = new Loader().loadPage("View/Item.fxml");
+        FXMLLoader loadeFXML = new Loader().loadeFXML("View/Item.fxml");
+        item=loadeFXML.load();
+        ItemController controller=loadeFXML.<ItemController>getController();
+        controller.setLogin(login);
         new SlideInRight(item).play();
         rootMain.getChildren().setAll(item);
 
@@ -199,11 +212,12 @@ public class DashboardController implements Initializable {
             MessageBox.showErrorMessage(ex.getMessage(), "Error");
         }
     }
-    private AnchorPane report; 
+    private AnchorPane report;
+
     @FXML
     private void btnMainReport_OnAction(ActionEvent event) throws IOException {
         report = new Loader().loadPage("View/ReportView.fxml");
-            new SlideInUp(report).play();
-            rootMain.getChildren().setAll(report);
+        new SlideInUp(report).play();
+        rootMain.getChildren().setAll(report);
     }
 }

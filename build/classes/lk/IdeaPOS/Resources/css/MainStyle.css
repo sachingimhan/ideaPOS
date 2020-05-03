@@ -1,7 +1,11 @@
 /*
  * Dark Theme
  */
-
+.login-background{
+    -fx-background-image: url(../images/ideaPOS.png);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
 .jfx-text-field{
     -jfx-focus-color: #097541;
     -fx-prompt-text-fill: #455a64;

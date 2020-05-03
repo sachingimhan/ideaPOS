@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.log4j.BasicConfigurator;
 
 /**
  *
@@ -57,6 +58,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        BasicConfigurator.configure();
+        launch(args);    
     }
 }

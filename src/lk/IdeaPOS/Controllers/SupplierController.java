@@ -23,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.IdeaPOS.Model.Login;
 import lk.IdeaPOS.Model.Supplier;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
@@ -68,6 +69,8 @@ public class SupplierController implements Initializable {
     @FXML
     private Label lblMessage;
 
+    private Login login;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colSupplierID.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
@@ -95,6 +98,14 @@ public class SupplierController implements Initializable {
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             tblSupplier.setItems(searchSupplier(newValue));
         });
+    }
+    
+    public void setLogin(Login login) {
+        this.login = login;
+        if (!this.login.getRole().equals("Administrator")) {
+            btnSupplierUpdate.setDisable(true);
+            btnSupplierDelete.setDisable(true);
+        }
     }
     
     private ObservableList<Supplier> searchSupplier(String filter) {
@@ -150,7 +161,7 @@ public class SupplierController implements Initializable {
         getSupplierID();
     }
 
-    public String getLastSupplierID() {
+    private String getLastSupplierID() {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT supplierID FROM Supplier ORDER BY supplierID DESC LIMIT 1");
             ResultSet rs = pst.executeQuery();
@@ -163,7 +174,7 @@ public class SupplierController implements Initializable {
         return null;
     }
 
-    public boolean insertSupplier(Supplier sup) {
+    private boolean insertSupplier(Supplier sup) {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("INSERT INTO Supplier VALUES(?,?,?,?)");
             pst.setString(1, sup.getSupplierID());
@@ -177,7 +188,7 @@ public class SupplierController implements Initializable {
         return false;
     }
 
-    public ObservableList<Supplier> loardSupplierDataTable() {
+    private ObservableList<Supplier> loardSupplierDataTable() {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT * FROM Supplier");
             ResultSet rs = pst.executeQuery();
@@ -197,7 +208,7 @@ public class SupplierController implements Initializable {
         return null;
     }
 
-    public boolean updateSupplier(Supplier sup) {
+    private boolean updateSupplier(Supplier sup) {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("UPDATE Supplier SET name=?,address=?,contact=? WHERE supplierID=?");
             pst.setString(1, sup.getName());
@@ -211,7 +222,7 @@ public class SupplierController implements Initializable {
         return false;
     }
 
-    public boolean deleteSupplier(String supID) {
+    private boolean deleteSupplier(String supID) {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("DELETE FROM Supplier WHERE supplierID=?");
             pst.setString(1, supID);

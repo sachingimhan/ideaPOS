@@ -26,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lk.IdeaPOS.Model.Item;
+import lk.IdeaPOS.Model.Login;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
 
@@ -85,6 +86,8 @@ public class ItemController implements Initializable {
     @FXML
     private Button btnRandomItemCode;
 
+    private Login login;
+    
     /**
      * Initializes the controller class.
      */
@@ -128,6 +131,14 @@ public class ItemController implements Initializable {
         return null;
     }
 
+     public void setLogin(Login login) {
+        this.login = login;
+        if (!this.login.getRole().equals("Administrator")) {
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+        }
+    }
+    
     private long genRandom() {
         Random r = new Random(System.currentTimeMillis());
         long l = 1000000000 + r.nextInt(2000000000);

@@ -170,6 +170,10 @@ public class GRNController implements Initializable {
 
     public void setLogin(Login login) {
         this.login = login;
+        if (!this.login.getRole().equals("Administrator")) {
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+        }
     }
 
     private void loadTableView() {

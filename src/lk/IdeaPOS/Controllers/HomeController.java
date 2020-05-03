@@ -20,6 +20,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import lk.IdeaPOS.Util.DBUtil;
+import lk.IdeaPOS.Util.MessageBox;
+import lk.IdeaPOS.Util.MessageIconType;
 
 /**
  * FXML Controller class
@@ -48,6 +50,9 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         chtSales.getData().setAll(monthlySales());
         chtSales.setLegendVisible(false);
+        toDayOrders();
+        toDayReturns();
+        reorderItems();
     }
 
     private XYChart.Series monthlySales() {
@@ -61,8 +66,44 @@ public class HomeController implements Initializable {
             }
             return series;
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            MessageBox.showErrorMessage(ex.getMessage(), "Error");
         }
         return null;
+    }
+
+    private void toDayOrders() {
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(orderID) as orderCount FROM `Order` WHERE orderDate=DATE(now())");
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                lblOrderCount.setText(String.valueOf(rs.getInt("orderCount")));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.showErrorMessage(ex.getMessage(), "Error");
+        }
+    }
+    
+    private void toDayReturns(){
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(retID) as returnCount FROM CustomerReturn WHERE retDate=DATE(now())");
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                lblReturnCount.setText(String.valueOf(rs.getInt("returnCount")));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.showErrorMessage(ex.getMessage(), "Error");
+        }
+    }
+    
+    private void reorderItems(){
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(itemCode) AS reordrItem FROM Item WHERE itemQty<=reorderLevel");
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                lblReorderlvl.setText(String.valueOf(rs.getInt("reordrItem")));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.showErrorMessage(ex.getMessage(), "Error");
+        }
     }
 }

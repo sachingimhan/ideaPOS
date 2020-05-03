@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -14,7 +15,7 @@
 
 <StackPane fx:id="loginStack" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.LoginController">
    <children>
-      <AnchorPane fx:id="AnchorLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" styleClass="subBackground-color" stylesheets="@../Resources/css/MainStyle.css">
+      <AnchorPane fx:id="AnchorLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" stylesheets="@../Resources/css/MainStyle.css">
          <children>
             <Pane fx:id="loginPane" layoutX="492.0" layoutY="103.0" prefHeight="379.0" prefWidth="452.0" AnchorPane.rightAnchor="80.0">
                <children>
@@ -59,6 +60,10 @@
          <StackPane.margin>
             <Insets />
          </StackPane.margin>
+         <styleClass>
+            <String fx:value="subBackground-color" />
+            <String fx:value="login-background" />
+         </styleClass>
       </AnchorPane>
    </children>
 </StackPane>

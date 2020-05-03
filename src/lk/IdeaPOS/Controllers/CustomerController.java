@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.IdeaPOS.Model.Customer;
+import lk.IdeaPOS.Model.Login;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
 
@@ -72,6 +73,8 @@ public class CustomerController implements Initializable {
     @FXML
     private Label lblMessage;
 
+    private Login login;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colID.setCellValueFactory(new PropertyValueFactory<>("custID"));
@@ -102,6 +105,14 @@ public class CustomerController implements Initializable {
 
     }
 
+    public void setLogin(Login login) {
+        this.login = login;
+        if (!this.login.getRole().equals("Administrator")) {
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+        }
+    }
+
     private ObservableList<Customer> searchCustomer(String filter) {
         try {
             PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT * FROM Customer WHERE CONCAT(custID,custName,custContact) LIKE '%" + filter + "%'");
@@ -127,24 +138,6 @@ public class CustomerController implements Initializable {
         long l = 100000000 + r.nextInt(200000000);
         l = l < 0 ? -l : l;
         lblCustID.setText(Long.toOctalString(l));
-//        String last = getLastCustomerID();
-//        if (last != null) {
-//            String[] split = last.split("-");
-//            int num = Integer.parseInt(split[1]);
-//            num++;
-//            if (num < 10) {
-//                custID = "CUST-000" + num;
-//            } else if (num < 100) {
-//                custID = "CUST-00" + num;
-//            } else if (num < 1000) {
-//                custID = "CUST-0" + num;
-//            } else {
-//                custID = "CUST-" + num;
-//            }
-//        } else {
-//            custID = "CUST-0001";
-//        }
-
     }
 
     private void loadDataTable() {
