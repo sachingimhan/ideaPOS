@@ -184,32 +184,37 @@ public class POSSystemController implements Initializable {
         colQty.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<OrderItem, String>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<OrderItem, String> event) {
-                event.getTableView().getItems().get(event.getTablePosition().getRow()).setQty(event.getNewValue());
-                if (Double.parseDouble(event.getNewValue()) > itemQty) {
-                    event.getTableView().getItems().get(event.getTablePosition().getRow()).setQty(Double.toString(itemQty));
+                try {
+                    event.getTableView().getItems().get(event.getTablePosition().getRow()).setQty(event.getNewValue());
+                    if (Double.parseDouble(event.getNewValue()) > itemQty) {
+                        event.getTableView().getItems().get(event.getTablePosition().getRow()).setQty(Double.toString(itemQty));
+                    }
+                    //update Table Column
+                    double subtotal = 0;
+                    double unitprice = 0;
+                    double discount = 0;
+                    double itemQty = 0;
+                    if (event.getTableView().getItems().get(event.getTablePosition().getRow()).getDiscount() != 0.0) {
+                        //update table SubTotal When item has Discount                   
+                        unitprice = event.getTableView().getItems().get(event.getTablePosition().getRow()).getUnitPrice();
+                        discount = event.getTableView().getItems().get(event.getTablePosition().getRow()).getDiscount();
+                        itemQty = Double.parseDouble(event.getTableView().getItems().get(event.getTablePosition().getRow()).getQty());
+                        subtotal = (unitprice - discount) * itemQty;
+                        event.getTableView().getItems().get(event.getTablePosition().getRow()).setSubTotal(subtotal);
+                    } else {
+                        //update table Subtotal When item dose not have a discount
+                        itemQty = Double.parseDouble(event.getTableView().getItems().get(event.getTablePosition().getRow()).getQty());
+                        unitprice = event.getTableView().getItems().get(event.getTablePosition().getRow()).getUnitPrice();
+                        subtotal = itemQty * unitprice;
+                        event.getTableView().getItems().get(event.getTablePosition().getRow()).setSubTotal(subtotal);
+                    }
+                    tblPos.refresh();
+                    calSubTotal();
+                    txtItemCode.requestFocus();
+                } catch (NumberFormatException | NullPointerException ex) {
+                    MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
                 }
-                //update Table Column
-                double subtotal = 0;
-                double unitprice = 0;
-                double discount = 0;
-                double itemQty = 0;
-                if (event.getTableView().getItems().get(event.getTablePosition().getRow()).getDiscount() != 0.0) {
-                    //update table SubTotal When item has Discount                   
-                    unitprice = event.getTableView().getItems().get(event.getTablePosition().getRow()).getUnitPrice();
-                    discount = event.getTableView().getItems().get(event.getTablePosition().getRow()).getDiscount();
-                    itemQty = Double.parseDouble(event.getTableView().getItems().get(event.getTablePosition().getRow()).getQty());
-                    subtotal = (unitprice - discount) * itemQty;
-                    event.getTableView().getItems().get(event.getTablePosition().getRow()).setSubTotal(subtotal);
-                } else {
-                    //update table Subtotal When item dose not have a discount
-                    itemQty = Double.parseDouble(event.getTableView().getItems().get(event.getTablePosition().getRow()).getQty());
-                    unitprice = event.getTableView().getItems().get(event.getTablePosition().getRow()).getUnitPrice();
-                    subtotal = itemQty * unitprice;
-                    event.getTableView().getItems().get(event.getTablePosition().getRow()).setSubTotal(subtotal);
-                }
-                tblPos.refresh();
-                calSubTotal();
-                txtItemCode.requestFocus();
+
             }
         });
     }

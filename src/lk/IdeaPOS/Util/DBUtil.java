@@ -5,9 +5,15 @@
  */
 package lk.IdeaPOS.Util;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileSystems;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+import lk.IdeaPOS.Model.DatabaseSetting;
 
 /**
  *
@@ -17,20 +23,43 @@ public class DBUtil {
 
     private static DBUtil util;
     private final Connection connection;
-    private final String url="jdbc:mysql://localhost:3306/ideaPOS";
-    private final String user="root";
-    private final String password="rockey@123";
+//    private final String url="jdbc:mysql://localhost:3306/ideaPOS";
+//    private final String user="root";
+//    private final String password="rockey@123";
 
     private DBUtil() throws ClassNotFoundException, SQLException {
+        DatabaseSetting rp = readProperties();
         Class.forName("org.mariadb.jdbc.Driver");
-        connection=DriverManager.getConnection(url, user, password);
+        connection = DriverManager.getConnection("jdbc:mysql://" + rp.getHost() + ":" + rp.getPort() + "/" + rp.getDbName() + "", rp.getUser(), rp.getPasswd());
     }
 
     public static DBUtil getInstance() throws ClassNotFoundException, SQLException {
         return util == null ? util = new DBUtil() : util;
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() {
         return connection;
+    }
+
+    private DatabaseSetting readProperties() {
+        //get currnt path
+        String pwd = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
+        try {
+            //
+            InputStream inputStream = new FileInputStream(pwd + "/Settings/Config.properties");
+            Properties p = new Properties();
+            p.load(inputStream);
+            System.out.println("Wor");
+            return new DatabaseSetting(
+                    p.getProperty("db.Host"),
+                    p.getProperty("db.User"),
+                    p.getProperty("db.Pass"),
+                    p.getProperty("db.Port"),
+                    p.getProperty("db.DbName")
+            );
+        } catch (IOException ex) {
+            MessageBox.showErrorMessage(ex.getLocalizedMessage(), "Error");
+        }
+        return null;
     }
 }

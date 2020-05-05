@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="158" pageHeight="864" columnWidth="130" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="ed19834f-f487-4a31-81b5-52aa6c2babe5">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="businessName" class="java.lang.String">
+		<defaultValueExpression><![CDATA["IdeaPOS System"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="tel" class="java.lang.String"/>
+	<parameter name="regNo" class="java.lang.String"/>
+	<parameter name="orderID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     `Order`.`orderID` AS Order_orderID,
+     `Order`.`orderDate` AS Order_orderDate,
+     `Order`.`paymentMethod` AS Order_paymentMethod,
+     `Order`.`grossAmount` AS Order_grossAmount,
+     `Order`.`netAmount` AS Order_netAmount,
+     `Order`.`cash` AS Order_cash,
+     `Order`.`balance` AS Order_balance,
+     Customer.`custName` AS Customer_custName
+FROM
+     `Customer` Customer INNER JOIN `Order` `Order` ON Customer.`custID` = `Order`.`custID` WHERE `Order`.orderID=$P{orderID}]]>
+	</queryString>
+	<field name="Order_orderID" class="java.lang.String"/>
+	<field name="Order_orderDate" class="java.sql.Date"/>
+	<field name="Order_paymentMethod" class="java.lang.String"/>
+	<field name="Order_grossAmount" class="java.math.BigDecimal"/>
+	<field name="Order_netAmount" class="java.math.BigDecimal"/>
+	<field name="Order_cash" class="java.math.BigDecimal"/>
+	<field name="Order_balance" class="java.math.BigDecimal"/>
+	<field name="Customer_custName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="130" height="14" uuid="f4b13abb-74f7-493d-a00f-446b8d52f6b0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{businessName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="130" height="12" uuid="5852ae8d-5618-4750-920f-fd9230abf166"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="26" width="76" height="12" uuid="4ba8efd9-84a6-423a-b1ac-722a0ed33e2f"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="27" width="54" height="11" uuid="cfac4b4c-7aea-45ac-8ebd-fd51af8cc094"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{regNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="130" height="11" uuid="cade69a9-84ad-4a4e-bf97-3f1239eda8f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Order_orderID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
