@@ -2,15 +2,16 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="customer" prefHeight="555.0" prefWidth="804.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.CustomerController">
+<AnchorPane id="AnchorPane" fx:id="customer" prefHeight="555.0" prefWidth="804.0" styleClass="main-contener" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.CustomerController">
    <children>
-      <Label layoutX="15.0" layoutY="12.0" text="Custome :" textFill="#455a64" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="12.0">
+      <Label layoutX="15.0" layoutY="12.0" styleClass="lable-text-black" text="Custome :" textFill="#455a64" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="12.0">
          <font>
             <Font name="Poppins SemiBold" size="20.0" />
          </font>
@@ -26,7 +27,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label fx:id="lblCustID" layoutX="125.0" layoutY="12.0" text="ID" textFill="#455a64" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="12.0">
+      <Label fx:id="lblCustID" layoutX="125.0" layoutY="12.0" styleClass="lable-text-black" text="ID" textFill="#455a64" AnchorPane.leftAnchor="125.0" AnchorPane.topAnchor="12.0">
          <font>
             <Font name="Poppins SemiBold" size="20.0" />
          </font>
@@ -51,25 +52,41 @@
             <Font name="Poppins Light" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnClear" layoutX="17.0" layoutY="213.0" onAction="#btnClear_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="clear-btn" stylesheets="@../Resources/css/MainStyle.css" text="Clear" AnchorPane.leftAnchor="17.0">
+      <JFXButton fx:id="btnClear" layoutX="17.0" layoutY="213.0" onAction="#btnClear_handleButtonAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Clear" AnchorPane.leftAnchor="17.0">
          <font>
             <Font name="Poppins Light" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="buton" />
+            <String fx:value="buton-clear" />
+         </styleClass>
       </JFXButton>
-      <JFXButton fx:id="btnSave" layoutX="335.0" layoutY="213.0" onAction="#btnSave_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="save-btn" stylesheets="@../Resources/css/MainStyle.css" text="Save" AnchorPane.rightAnchor="275.0">
+      <JFXButton fx:id="btnSave" layoutX="335.0" layoutY="213.0" onAction="#btnSave_handleButtonAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Save" AnchorPane.rightAnchor="275.0">
          <font>
             <Font name="Poppins Light" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="buton" />
+            <String fx:value="buton-save" />
+         </styleClass>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="466.0" layoutY="213.0" onAction="#btnUpdate_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="update-btn" stylesheets="@../Resources/css/MainStyle.css" text="Update" AnchorPane.rightAnchor="144.0">
+      <JFXButton fx:id="btnUpdate" layoutX="466.0" layoutY="213.0" onAction="#btnUpdate_handleButtonAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Update" AnchorPane.rightAnchor="144.0">
          <font>
             <Font name="Poppins Light" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="buton" />
+            <String fx:value="buton-update" />
+         </styleClass>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" layoutX="596.0" layoutY="213.0" onAction="#btnDelete_handleButtonAction" prefHeight="40.0" prefWidth="120.0" styleClass="delete-btn" stylesheets="@../Resources/css/MainStyle.css" text="Delete" AnchorPane.rightAnchor="14.0">
+      <JFXButton fx:id="btnDelete" layoutX="596.0" layoutY="213.0" onAction="#btnDelete_handleButtonAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Delete" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Poppins Light" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="buton" />
+            <String fx:value="buton-delete" />
+         </styleClass>
       </JFXButton>
       <Label fx:id="lblMessage" alignment="CENTER_RIGHT" layoutX="444.0" layoutY="26.0" prefHeight="28.0" prefWidth="327.0" textAlignment="RIGHT" textFill="#455a64" AnchorPane.rightAnchor="33.0">
          <font>

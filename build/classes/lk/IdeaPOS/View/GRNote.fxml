@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="555.0" prefWidth="804.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.GRNController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="555.0" prefWidth="804.0" styleClass="main-contener" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.GRNController">
    <children>
       <TableView fx:id="tblGRNote" layoutX="15.0" layoutY="284.0" onMouseClicked="#tblGRNote_OnMouseClicked" prefHeight="160.0" prefWidth="701.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="284.0">
          <columns>
@@ -66,12 +67,12 @@
                   <Font name="Poppins Light" size="15.0" />
                </font>
             </JFXTextField>
-            <Button fx:id="btnRandomGrnNo" alignment="CENTER" mnemonicParsing="false" onAction="#btnRandomGrnNo_OnAction" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 40;" styleClass="reload-btn" stylesheets="@../Resources/css/MainStyle.css">
+            <Button fx:id="btnRandomGrnNo" alignment="CENTER" mnemonicParsing="false" onAction="#btnRandomGrnNo_OnAction" prefHeight="30.0" prefWidth="30.0" styleClass="button-only-icon" stylesheets="@../Resources/css/MainStyle.css">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" styleClass="glyph-black" />
                </graphic>
             </Button>
             <Button fx:id="btnFindItem" alignment="CENTER" mnemonicParsing="false" onAction="#btnFindItem_OnAction" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 30;" styleClass="find-btn" stylesheets="@../Resources/css/MainStyle.css" GridPane.columnIndex="1">
@@ -90,12 +91,12 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15" />
                </graphic>
             </Button>
-            <Button fx:id="btnRandomBatchNo" alignment="CENTER" mnemonicParsing="false" onAction="#btnRandomBatchNo_OnAction" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 40;" styleClass="reload-btn" stylesheets="@../Resources/css/MainStyle.css" GridPane.rowIndex="1">
+            <Button fx:id="btnRandomBatchNo" alignment="CENTER" mnemonicParsing="false" onAction="#btnRandomBatchNo_OnAction" prefHeight="30.0" prefWidth="30.0" styleClass="button-only-icon" stylesheets="@../Resources/css/MainStyle.css" GridPane.rowIndex="1">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="REFRESH" size="15" styleClass="glyph-black" />
                </graphic>
             </Button>
             <JFXTextField fx:id="txtItemQty" labelFloat="true" prefHeight="33.0" prefWidth="211.0" promptText="Item Qty" stylesheets="@../Resources/css/MainStyle.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -132,25 +133,41 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton fx:id="btnClear" maxWidth="1.7976931348623157E308" onAction="#btnClear_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="clear-btn" text="Clear">
+            <JFXButton fx:id="btnClear" maxWidth="1.7976931348623157E308" onAction="#btnClear_OnAction" prefHeight="40.0" prefWidth="120.0" text="Clear">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
+               <styleClass>
+                  <String fx:value="buton" />
+                  <String fx:value="buton-clear" />
+               </styleClass>
             </JFXButton>
-            <JFXButton fx:id="btnSave" maxWidth="1.7976931348623157E308" onAction="#btnSave_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="save-btn" text="Save" GridPane.columnIndex="2">
+            <JFXButton fx:id="btnSave" maxWidth="1.7976931348623157E308" onAction="#btnSave_OnAction" prefHeight="40.0" prefWidth="120.0" text="Save" GridPane.columnIndex="2">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
+               <styleClass>
+                  <String fx:value="buton" />
+                  <String fx:value="buton-save" />
+               </styleClass>
             </JFXButton>
-            <JFXButton fx:id="btnUpdate" maxWidth="1.7976931348623157E308" onAction="#btnUpdate_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="update-btn" text="Update" GridPane.columnIndex="3">
+            <JFXButton fx:id="btnUpdate" maxWidth="1.7976931348623157E308" onAction="#btnUpdate_OnAction" prefHeight="40.0" prefWidth="120.0" text="Update" GridPane.columnIndex="3">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
+               <styleClass>
+                  <String fx:value="buton" />
+                  <String fx:value="buton-update" />
+               </styleClass>
             </JFXButton>
-            <JFXButton fx:id="btnDelete" maxWidth="1.7976931348623157E308" onAction="#btnDelete_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="delete-btn" text="Delete" GridPane.columnIndex="4">
+            <JFXButton fx:id="btnDelete" maxWidth="1.7976931348623157E308" onAction="#btnDelete_OnAction" prefHeight="40.0" prefWidth="120.0" text="Delete" GridPane.columnIndex="4">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
+               <styleClass>
+                  <String fx:value="buton" />
+                  <String fx:value="buton-delete" />
+               </styleClass>
             </JFXButton>
          </children>
       </GridPane>
@@ -164,7 +181,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="28.0" prefWidth="230.0" text="Goods Received Note" textFill="#455a64">
+            <Label prefHeight="28.0" prefWidth="230.0" styleClass="lable-text-black" text="Goods Received Note" textFill="#455a64">
                <font>
                   <Font name="Poppins SemiBold" size="20.0" />
                </font>

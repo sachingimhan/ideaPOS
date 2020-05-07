@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,78 +13,138 @@
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="555.0" prefWidth="804.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.HomeController">
    <children>
-      <GridPane hgap="20.0" layoutX="14.0" layoutY="57.0" prefHeight="76.0" prefWidth="772.0" vgap="20.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0">
+      <GridPane hgap="20.0" layoutX="14.0" layoutY="57.0" prefHeight="109.0" prefWidth="772.0" vgap="20.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #8e44ad; -fx-background-radius: 10;">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="3.0" prefHeight="20.0" prefWidth="233.0" text="Today Orders" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
+                  <Label alignment="CENTER" graphicTextGap="8.0" layoutX="6.0" layoutY="3.0" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="233.0" styleClass="lable-text-white" text="ORDERS" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <font>
-                        <Font name="Poppins SemiBold" size="20.0" />
+                        <Font name="Poppins SemiBold" size="26.0" />
                      </font>
                   </Label>
                   <Label fx:id="lblOrderCount" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="40.0" prefHeight="20.0" prefWidth="233.0" text="0" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
                      <font>
-                        <Font name="Poppins SemiBold" size="20.0" />
+                        <Font name="Poppins SemiBold" size="45.0" />
                      </font>
                   </Label>
                </children>
+               <styleClass>
+                  <String fx:value="info-tile" />
+                  <String fx:value="color-orange" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d35400; -fx-background-radius: 10;" GridPane.columnIndex="1">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="5.0" prefHeight="20.0" prefWidth="233.0" text="Today Returns" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="5.0" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="233.0" styleClass="lable-text-white" text="RETURNS" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <font>
-                        <Font name="Poppins SemiBold" size="20.0" />
+                        <Font name="Poppins SemiBold" size="26.0" />
                      </font>
                   </Label>
                   <Label fx:id="lblReturnCount" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="40.0" prefHeight="20.0" prefWidth="233.0" text="0" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
                      <font>
-                        <Font name="Poppins SemiBold" size="20.0" />
+                        <Font name="Poppins SemiBold" size="45.0" />
                      </font>
                   </Label>
                </children>
+               <styleClass>
+                  <String fx:value="info-tile" />
+                  <String fx:value="color-pumkin" />
+               </styleClass>
             </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #16a085; -fx-background-radius: 10;" GridPane.columnIndex="2">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="7.0" prefHeight="20.0" prefWidth="233.0" text="Reorder Level Items" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="7.0" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="233.0" styleClass="lable-text-white" text="REORDER ITEM" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <font>
-                        <Font name="Poppins SemiBold" size="20.0" />
+                        <Font name="Poppins SemiBold" size="26.0" />
                      </font>
                   </Label>
                   <Label fx:id="lblReorderlvl" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="40.0" prefHeight="20.0" prefWidth="233.0" text="0" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
                      <font>
-                        <Font name="Poppins SemiBold" size="20.0" />
+                        <Font name="Poppins SemiBold" size="45.0" />
                      </font>
                   </Label>
                </children>
+               <styleClass>
+                  <String fx:value="info-tile" />
+                  <String fx:value="color-nephrites" />
+               </styleClass>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="7.0" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="233.0" styleClass="lable-text-white" text="G.R.Notes" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="Poppins SemiBold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblGrnCount" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="40.0" prefHeight="20.0" prefWidth="233.0" text="0" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
+                     <font>
+                        <Font name="Poppins SemiBold" size="45.0" />
+                     </font>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="color-greensea" />
+                  <String fx:value="info-tile" />
+               </styleClass>
             </AnchorPane>
          </children>
       </GridPane>
-      <Label layoutX="14.0" layoutY="14.0" text="Dashboard Summary" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font name="Poppins SemiBold" size="20.0" />
-         </font>
-      </Label>
-      <LineChart fx:id="chtSales" layoutX="14.0" layoutY="146.0" prefHeight="398.0" prefWidth="772.0" title="Monthly Sales" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="146.0">
+      <BarChart fx:id="chtSales" layoutX="14.0" layoutY="208.0" prefHeight="325.0" prefWidth="772.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="208.0">
         <xAxis>
-          <CategoryAxis label="Month" side="BOTTOM" tickLabelFill="WHITE" fx:id="xMonth">
-               <tickLabelFont>
-                  <Font name="Poppins SemiBold" size="13.0" />
-               </tickLabelFont></CategoryAxis>
+          <CategoryAxis side="BOTTOM" fx:id="xMonth" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="ySales" label="Sales" side="LEFT" tickLabelFill="WHITE">
-               <tickLabelFont>
-                  <Font name="Poppins SemiBold" size="13.0" />
-               </tickLabelFont></NumberAxis>
+          <NumberAxis fx:id="ySales" side="LEFT" />
         </yAxis>
-      </LineChart>
+      </BarChart>
+      <GridPane layoutX="19.0" layoutY="14.0" prefHeight="30.0" prefWidth="772.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="292.0" styleClass="lable-text-black" text="Monthly Sales Details" textFill="WHITE">
+               <font>
+                  <Font name="Poppins SemiBold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="292.0" styleClass="lable-text-black" text="Monthly Stock Details" textFill="WHITE" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Poppins SemiBold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane layoutX="16.0" layoutY="179.0" prefHeight="30.0" prefWidth="772.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="179.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="292.0" styleClass="lable-text-black" text="Monthly Summary" textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font name="Poppins SemiBold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

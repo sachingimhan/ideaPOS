@@ -1,146 +1,118 @@
 /*
- * Dark Theme
- */
-.login-background{
-    -fx-background-image: url(../images/ideaPOS.png);
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: stretch;
+Dashboard Css
+*/
+/*Slid Menu*/
+.slid-menu{
+    -fx-background-color: #007ACC;
+}
+.slid-menu-btn{
+    -fx-background-color: #007ACC;
+    -fx-background-radius: 20px;
+}
+.slid-menu-btn:hover{
+    -fx-background-color: #000088;
+}
+.slid-menu-btn > .text{
+    -fx-fill: #FFFFFF;
+}
+.slid-menu-glyph-icon{
+    -fx-fill: #FFFFFF;
+}
+/*Main Contener*/
+.main-contener{
+    -fx-background-color: #FFFFFF;
+}
+/*Top Ststus bar*/
+.top-bar{
+    -fx-background-color: #007ACC;
+}
+.top-bar-btn-exit{
+    -fx-background-color: #C20114;
+}
+.top-bar-btn-minz{
+    -fx-background-color: #FF8811;
+}
+.top-bar-btn{
+    -fx-background-color: #007ACC;
 }
 .jfx-text-field{
-    -jfx-focus-color: #097541;
-    -fx-prompt-text-fill: #455a64;
-    -fx-text-fill: #ffffff;
-    -jfx-focus-color: #455a64;
+    -jfx-focus-color: #000000;
+    -fx-prompt-text-fill: #000000;
+    -fx-text-fill: #000000;
+    -jfx-focus-color: #000000;
 }
-.jfx-password-field{
-    -jfx-focus-color: #097541;
-    -fx-prompt-text-fill: #455a64;
-    -fx-text-fill: #ffffff;
-    -jfx-focus-color: #455a64;
+.jfx-text-field-white{
+    -jfx-focus-color: #FFFFFF;
+    -fx-prompt-text-fill: #FFFFFF;
+    -fx-text-fill: #FFFFFF;
+    -jfx-focus-color: #FFFFFF;
 }
-.jfx-date-picker{
-    -fx-font-family:Poppins Light;
-    -fx-font-size:15px;
+.lable-text-black{
+    -fx-text-fill: #000000;
+}
+.lable-text-white{
+    -fx-text-fill: #FFFFFF;
+}
+.info-tile{
+    -fx-background-radius: 0px;
+}
+.color-orange{
+    -fx-background-color: #f39c12;
+}
+.color-pumkin{
+    -fx-background-color: #d35400;
+}
+.color-greensea{
+    -fx-background-color: #16a085;
+}
+.color-nephrites{
+    -fx-background-color: #27ae60;
+}
+/*bar chart*/
+.chart-bar{
+    -fx-bar-fill:#C20114;
+}
+.axis {
+    -fx-font-size: 1.5em;    
+    -fx-tick-label-fill: #000000;
+    -fx-font-family: Tahoma;
+    -fx-tick-label-font: bolder medium Tahoma;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 10;
+}
+.buton{
+    -fx-background-radius: 20px;
+    -fx-text-fill: #FFFFFF;
+}
+.buton-delete{
+    -fx-background-color: #C20114;
+}
+.buton-update{
+    -fx-background-color: #007ACC;
+}
+.buton-save{
+    -fx-background-color: #00BD00;
+}
+.buton-clear{
+    -fx-background-color: #F15025;
 }
 .jfx-radio-button{
     -fx-font-family:Poppins Light;
     -fx-font-size:15px;
+    -fx-text-fill: #000000;
 }
-.jfx-radio-button .text{
-    -fx-fill:#455a64;
-}
-
-.jfx-dialog-layout{
-    -fx-font-family:Poppins Light;
-    -fx-font-size:15px;
-    -fx-spacing: 10px;
-}
-.jfx-dialog-layout .title{
-    -fx-alignment: CENTER;
-}
-.messagebox-lable{
-    -fx-text-fill:#ffffff;
-}
-.msg-btn{
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius:10px;
-    -fx-font-size:15px;
-}
-
-.exit-button{
-    -fx-background-color:#CC2936;
-    -fx-background-radius:30px;
-}
-.minimize-button{
-    -fx-background-color:#00B074;
-    -fx-background-radius:30px;
-}
-.primaryBackground-color{
-    -fx-background-color: #1F2125; /*#1F2125*/
-}
-.secoundryBackground{
-    -fx-background-color:  #23252E;
-}
-.subBackground-color{
-    -fx-background-color: #1F2125;
-}
-.mainMenuButton{
-    -fx-background-color: #1F2125;
-    -fx-text-fill: #ffffff;
-    -fx-background-radius: 20px;
-}
-.mainMenuButton:hover{
-    -fx-background-color: #00B074;
-    /*-fx-background-color: #0277BD;*/
-}
-.mainMenuButton:focused{
-    -fx-background-color: #00B074;
-}
-.mainExitButton{
-    -fx-background-color: #d32f2f;
-}
-.mainExitButton:hover{
-    -fx-background-color: #b71c1c;
-}
-.setting-Button{
-    -fx-background-color: #039BE5;
-}
-.setting-Button:hover{
-    -fx-background-color: #03A9F4;
-}
-.save-btn{
-    -fx-background-color:transparent;
-    -fx-background-radius: 10px;
-    -fx-border-color: #27ae60;
-    -fx-border-width: 2px;
-    -fx-border-radius: 10px;
-    -fx-text-fill:#27ae60;
-}
-.save-btn:hover{
-    -fx-border-color: #2ecc71;
-    -fx-text-fill:#2ecc71;
-}
-.update-btn{
-    -fx-background-color:transparent;
-    -fx-background-radius: 10px;
-    -fx-border-color: #2980b9;
-    -fx-border-width: 2px;
-    -fx-border-radius: 10px;
-    -fx-text-fill:#2980b9;
-}
-.update-btn:hover{
-    -fx-border-color: #3498db;
-    -fx-text-fill:#3498db;
-}
-.delete-btn{
-    -fx-background-color:transparent;
-    -fx-background-radius: 10px;
-    -fx-border-color: #c0392b;
-    -fx-border-width: 2px;
-    -fx-border-radius: 10px;
-    -fx-text-fill:#c0392b;
-}
-.delete-btn:hover{
-    -fx-border-color: #e74c3c;
-    -fx-text-fill:#e74c3c;
-}
-.clear-btn{
-    -fx-background-color:transparent;
-    -fx-background-radius: 10px;
-    -fx-border-color: #d35400;
-    -fx-border-width: 2px;
-    -fx-border-radius: 10px;
-    -fx-text-fill:#d35400;
-}
-.clear-btn:hover{
-    -fx-border-color: #e67e22;
-    -fx-text-fill:#e67e22;
-}
-.reload-btn{
+.button-only-icon{
     -fx-background-color: transparent;
 }
-.reload-btn:hover{
+.button-only-icon:hover{
     -fx-rotate: 30;
+}
+.glyph-black{
+    -fx-fill: #000000;
+}
+.jfx-date-picker{
+    -fx-font-family:Poppins Light;
+    -fx-font-size:15px;
 }
 .find-btn{
     -fx-background-color: transparent;
@@ -150,50 +122,6 @@
     -fx-scale-y: 1.2;
     -fx-scale-z: 1.2;
 }
-/*table view */
-.table-view{
-    -fx-background-color: transparent;
-}
-.table-view .column-header,
-.table-view .column-header-background .filler {
-    -fx-background-color: #2c3e50;
-}
-.table-view .column-header .label{
-    -fx-text-fill: white;
-    -fx-font-weight: bold; 
-    -fx-alignment: CENTER;
-}
-.table-row-cell:odd{
-    -fx-background-color: #353b48;
-}
-.table-row-cell:even{
-    -fx-background-color: #2f3640;
-}
-.table-row-cell:selected{
-    -fx-background-color: #2980b9;
-}
-.table-view .cell{
-    -fx-font-family:Poppins Light;
-    -fx-font-size:15px;
-    -fx-alignment: CENTER;
-    -fx-text-fill: #dcdde1;
-    -fx-border-color: transparent;
-}
-.chart-title {
-  -fx-text-fill: #ffffff;
-  -fx-font-size: 1.6em;
-}
-.axis-label {
-  -fx-text-fill: #4682b4;
-}
-
-.progress-bar > .bar{
-    -fx-background-color: linear-gradient(
-        from 0px .75em to .75em 0px,
-        repeat,
-        -fx-accent 0%,
-        -fx-accent 49%,
-        derive(-fx-accent, 30%) 50%,
-        derive(-fx-accent, 30%) 99%
-    );
+.glyph-red{
+    -fx-fill: #C20114;
 }

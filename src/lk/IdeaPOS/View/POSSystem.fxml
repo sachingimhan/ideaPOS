@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
@@ -16,9 +17,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.POSSystemController">
+<StackPane fx:id="root" styleClass="main-contener" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.POSSystemController">
    <children>
-      <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="804.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css">
+      <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="804.0" styleClass="main-contener" stylesheets="@../Resources/css/MainStyle.css">
          <children>
             <GridPane hgap="15.0" layoutX="14.0" layoutY="58.0" prefHeight="36.0" prefWidth="776.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                <columnConstraints>
@@ -40,12 +41,12 @@
                         <Font name="Poppins Light" size="15.0" />
                      </font>
                   </JFXTextField>
-                  <Button fx:id="btnFindItem" alignment="CENTER" mnemonicParsing="false" onAction="#btnFindItem_OnAction" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 30;" styleClass="find-btn" stylesheets="@../Resources/css/MainStyle.css">
+                  <Button fx:id="btnFindItem" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnFindItem_OnAction" prefHeight="28.0" prefWidth="28.0" styleClass="find-btn" stylesheets="@../Resources/css/MainStyle.css">
                      <font>
                         <Font name="Poppins SemiBold" size="15.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15" styleClass="icon" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="15" styleClass="glyph-black" />
                      </graphic>
                   </Button>
                   <JFXTextField fx:id="txtCustomerCode" labelFloat="true" onAction="#txtCustomerCode_OnAction" prefHeight="33.0" prefWidth="211.0" promptText="Customer Code" styleClass="text-feild" stylesheets="@../Resources/css/MainStyle.css" GridPane.columnIndex="1">
@@ -53,12 +54,12 @@
                         <Font name="Poppins Light" size="15.0" />
                      </font>
                   </JFXTextField>
-                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAdd_OnAction" prefHeight="40.0" prefWidth="40.0" styleClass="reload-btn" stylesheets="@../Resources/css/MainStyle.css" GridPane.columnIndex="2">
+                  <Button fx:id="btnAdd" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnAdd_OnAction" prefHeight="28.0" prefWidth="28.0" styleClass="find-btn" stylesheets="@../Resources/css/MainStyle.css" GridPane.columnIndex="2">
                      <font>
                         <Font name="Poppins Light" size="15.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="16" styleClass="icon" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="15" styleClass="glyph-black" />
                      </graphic>
                   </Button>
                </children>
@@ -93,22 +94,22 @@
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="14.0" text="Invoice No :" textFill="#455a64">
+            <Label layoutX="14.0" layoutY="14.0" styleClass="lable-text-black" text="Invoice No :" textFill="#455a64">
                <font>
                   <Font name="Poppins Light" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderID" layoutX="120.0" layoutY="16.0" text="INV-0001" textFill="#455a64">
+            <Label fx:id="lblOrderID" layoutX="120.0" layoutY="16.0" styleClass="lable-text-black" text="INV-0001" textFill="#455a64">
                <font>
                   <Font name="Poppins Light" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="398.0" layoutY="347.0" text="Gross Amount :" textFill="#455a64" AnchorPane.bottomAnchor="181.0" AnchorPane.rightAnchor="272.0">
+            <Label layoutX="398.0" layoutY="347.0" styleClass="lable-text-black" text="Gross Amount :" textFill="#455a64" AnchorPane.bottomAnchor="181.0" AnchorPane.rightAnchor="272.0">
                <font>
                   <Font name="Poppins Light" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblSubTotal" alignment="CENTER_RIGHT" layoutX="538.0" layoutY="343.0" prefHeight="36.0" prefWidth="248.0" text="0.00" textFill="#455a64" AnchorPane.bottomAnchor="176.0" AnchorPane.rightAnchor="18.0">
+            <Label fx:id="lblSubTotal" alignment="CENTER_RIGHT" layoutX="538.0" layoutY="343.0" prefHeight="36.0" prefWidth="248.0" styleClass="lable-text-black" text="0.00" textFill="#455a64" AnchorPane.bottomAnchor="176.0" AnchorPane.rightAnchor="18.0">
                <font>
                   <Font name="Poppins SemiBold" size="20.0" />
                </font>
@@ -118,27 +119,27 @@
                   <Font name="Poppins Light" size="20.0" />
                </font>
             </JFXTextField>
-            <Label layoutX="478.0" layoutY="449.0" text="Cash :" textFill="#455a64" AnchorPane.bottomAnchor="79.0" AnchorPane.rightAnchor="269.0">
+            <Label layoutX="478.0" layoutY="449.0" styleClass="lable-text-black" text="Cash :" textFill="#455a64" AnchorPane.bottomAnchor="79.0" AnchorPane.rightAnchor="269.0">
                <font>
                   <Font name="Poppins Light" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="421.0" layoutY="413.0" text="NET Amount :" textFill="#455a64" AnchorPane.bottomAnchor="115.0" AnchorPane.rightAnchor="269.0">
+            <Label layoutX="421.0" layoutY="413.0" styleClass="lable-text-black" text="NET Amount :" textFill="#455a64" AnchorPane.bottomAnchor="115.0" AnchorPane.rightAnchor="269.0">
                <font>
                   <Font name="Poppins Light" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblNetAmount" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="538.0" layoutY="385.0" prefHeight="51.0" prefWidth="248.0" text="0.00" textAlignment="RIGHT" textFill="#455a64" AnchorPane.bottomAnchor="119.0" AnchorPane.rightAnchor="18.0">
+            <Label fx:id="lblNetAmount" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="538.0" layoutY="385.0" prefHeight="51.0" prefWidth="248.0" styleClass="lable-text-black" text="0.00" textAlignment="RIGHT" textFill="#455a64" AnchorPane.bottomAnchor="119.0" AnchorPane.rightAnchor="18.0">
                <font>
                   <Font name="Poppins SemiBold" size="30.0" />
                </font>
             </Label>
-            <Label layoutX="452.0" layoutY="495.0" text="Balance :" textFill="#455a64" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="269.0">
+            <Label layoutX="452.0" layoutY="495.0" styleClass="lable-text-black" text="Balance :" textFill="#455a64" AnchorPane.bottomAnchor="33.0" AnchorPane.rightAnchor="269.0">
                <font>
                   <Font name="Poppins Light" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblBalance" alignment="CENTER_RIGHT" layoutX="538.0" layoutY="493.0" prefHeight="36.0" prefWidth="248.0" text="0.00" textFill="#455a64" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="18.0">
+            <Label fx:id="lblBalance" alignment="CENTER_RIGHT" layoutX="538.0" layoutY="493.0" prefHeight="36.0" prefWidth="248.0" styleClass="lable-text-black" text="0.00" textFill="#455a64" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="18.0">
                <font>
                   <Font name="Poppins SemiBold" size="20.0" />
                </font>
@@ -150,29 +151,41 @@
             </Label>
             <JFXRadioButton fx:id="rbCardPay" layoutX="139.0" layoutY="345.0" text="Card Pay" textFill="WHITE" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="139.0" />
             <JFXRadioButton fx:id="rbCashPay" layoutX="20.0" layoutY="344.0" text="Cash Pay" textFill="WHITE" AnchorPane.bottomAnchor="188.0" AnchorPane.leftAnchor="20.0" />
-            <Button fx:id="btnReturn" graphicTextGap="5.0" layoutX="15.0" layoutY="483.0" lineSpacing="5.0" mnemonicParsing="false" onAction="#btnReturn_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="update-btn" stylesheets="@../Resources/css/MainStyle.css" text="Return" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="15.0">
+            <Button fx:id="btnReturn" graphicTextGap="5.0" layoutX="15.0" layoutY="483.0" lineSpacing="5.0" mnemonicParsing="false" onAction="#btnReturn_OnAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Return" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="15.0">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="MAIL_REPLY" lineSpacing="10.0" size="15" styleClass="icon" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="MAIL_REPLY" lineSpacing="10.0" size="15" styleClass="glyph-icon" />
                </graphic>
+               <styleClass>
+                  <String fx:value="buton-delete" />
+                  <String fx:value="buton" />
+               </styleClass>
             </Button>
-            <Button fx:id="btnHoldTran" graphicTextGap="5.0" layoutX="143.0" layoutY="484.0" lineSpacing="5.0" mnemonicParsing="false" onAction="#btnHoldTran_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="clear-btn" stylesheets="@../Resources/css/MainStyle.css" text="Hold" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="143.0">
+            <Button fx:id="btnHoldTran" graphicTextGap="5.0" layoutX="143.0" layoutY="484.0" lineSpacing="5.0" mnemonicParsing="false" onAction="#btnHoldTran_OnAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Hold" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="143.0">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="LINK" lineSpacing="10.0" size="15" styleClass="icon" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="LINK" lineSpacing="10.0" size="15" styleClass="glyph-icon" />
                </graphic>
+               <styleClass>
+                  <String fx:value="buton-update" />
+                  <String fx:value="buton" />
+               </styleClass>
             </Button>
-            <Button fx:id="btnPayment" graphicTextGap="5.0" layoutX="273.0" layoutY="484.0" lineSpacing="5.0" mnemonicParsing="false" onAction="#btnPayment_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="save-btn" stylesheets="@../Resources/css/MainStyle.css" text="Pay" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="273.0">
+            <Button fx:id="btnPayment" graphicTextGap="5.0" layoutX="273.0" layoutY="484.0" lineSpacing="5.0" mnemonicParsing="false" onAction="#btnPayment_OnAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Pay" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="273.0">
                <font>
                   <Font name="Poppins SemiBold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="DOLLAR" lineSpacing="10.0" size="15" styleClass="icon" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="DOLLAR" lineSpacing="10.0" size="15" styleClass="glyph-icon" />
                </graphic>
+               <styleClass>
+                  <String fx:value="buton-save" />
+                  <String fx:value="buton" />
+               </styleClass>
             </Button>
          </children>
       </AnchorPane>

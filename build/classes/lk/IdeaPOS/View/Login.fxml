@@ -13,26 +13,30 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="loginStack" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.LoginController">
+<StackPane fx:id="loginStack" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" styleClass="slid-menu" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.LoginController">
    <children>
-      <AnchorPane fx:id="AnchorLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" stylesheets="@../Resources/css/MainStyle.css">
+      <AnchorPane fx:id="AnchorLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" styleClass="slid-menu" stylesheets="@../Resources/css/MainStyle.css">
          <children>
             <Pane fx:id="loginPane" layoutX="492.0" layoutY="103.0" prefHeight="379.0" prefWidth="452.0" AnchorPane.rightAnchor="80.0">
                <children>
-                  <JFXTextField fx:id="txtUserName" focusColor="#097541" labelFloat="true" layoutX="80.0" layoutY="224.0" onAction="#txtUserName_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="User Name" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE">
+                  <JFXTextField fx:id="txtUserName" focusColor="#097541" labelFloat="true" layoutX="80.0" layoutY="224.0" onAction="#txtUserName_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="User Name" styleClass="jfx-text-field-white" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE">
                      <font>
                         <Font name="Poppins Light" size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="txtPassword" focusColor="#097541" labelFloat="true" layoutX="80.0" layoutY="279.0" onAction="#txtPassword_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="Password" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE">
+                  <JFXPasswordField fx:id="txtPassword" focusColor="#097541" labelFloat="true" layoutX="80.0" layoutY="279.0" onAction="#txtPassword_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="Password" styleClass="jfx-text-field-white" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE">
                      <font>
                         <Font name="Poppins Light" size="15.0" />
                      </font>
                   </JFXPasswordField>
-                  <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="80.0" layoutY="339.0" onAction="#btnLogin_OnAction" prefHeight="32.0" prefWidth="300.0" styleClass="setting-Button" stylesheets="@../Resources/css/MainStyle.css" text="Login" textAlignment="CENTER" textFill="WHITE">
+                  <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="80.0" layoutY="339.0" onAction="#btnLogin_OnAction" prefHeight="32.0" prefWidth="300.0" stylesheets="@../Resources/css/MainStyle.css" text="Login" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Poppins Light" size="15.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="buton" />
+                        <String fx:value="buton-delete" />
+                     </styleClass>
                   </JFXButton>
                   <Label contentDisplay="TOP" graphicTextGap="0.0" layoutX="187.0" layoutY="56.0" style="-fx-text-fill: #FFFFFF;" text="Login" textAlignment="CENTER">
                      <font>
@@ -45,8 +49,8 @@
                         <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="LOCK" size="100" textAlignment="CENTER" />
                      </graphic>
                   </Label>
-                  <FontAwesomeIconView fill="#455a64" glyphName="USER" layoutX="55.0" layoutY="252.0" size="20" />
-                  <FontAwesomeIconView fill="#455a64" glyphName="KEY" layoutX="55.0" layoutY="305.0" size="20" />
+                  <FontAwesomeIconView fill="#455a64" glyphName="USER" layoutX="55.0" layoutY="252.0" size="20" styleClass="slid-menu-glyph-icon" />
+                  <FontAwesomeIconView fill="#455a64" glyphName="KEY" layoutX="55.0" layoutY="305.0" size="20" styleClass="slid-menu-glyph-icon" />
                </children>
             </Pane>
             <Separator layoutX="486.0" layoutY="71.0" orientation="VERTICAL" prefHeight="472.0" prefWidth="3.0" AnchorPane.bottomAnchor="57.0" AnchorPane.rightAnchor="532.0" AnchorPane.topAnchor="71.0" />
@@ -55,15 +59,14 @@
                   <Font name="Poppins Light" size="15.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnExit" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="1000.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnExit_OnAction" prefHeight="15.0" prefWidth="15.0" styleClass="exit-button" stylesheets="@../Resources/css/MainStyle.css" text=" " AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0" />
+            <JFXButton fx:id="btnExit" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="1000.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnExit_OnAction" prefHeight="15.0" prefWidth="15.0" styleClass="buton" stylesheets="@../Resources/css/MainStyle.css" text=" " AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
+               <graphic>
+                  <FontAwesomeIconView glyphName="REMOVE" size="20" styleClass="glyph-red" />
+               </graphic></JFXButton>
          </children>
          <StackPane.margin>
             <Insets />
          </StackPane.margin>
-         <styleClass>
-            <String fx:value="subBackground-color" />
-            <String fx:value="login-background" />
-         </styleClass>
       </AnchorPane>
    </children>
 </StackPane>

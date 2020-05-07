@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -9,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.GRNSupplierSearchController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="main-contener" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.GRNSupplierSearchController">
    <children>
-      <Label layoutX="11.0" layoutY="7.0" text="Find Supplier :" textFill="#455a64">
+      <Label layoutX="11.0" layoutY="7.0" styleClass="lable-text-black" text="Find Supplier :" textFill="#455a64">
          <font>
             <Font name="Poppins SemiBold" size="20.0" />
          </font>
@@ -30,10 +31,14 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="btnFind" layoutX="465.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnFind_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="save-btn" stylesheets="@../Resources/css/MainStyle.css" text="Find">
+      <Button fx:id="btnFind" layoutX="465.0" layoutY="347.0" mnemonicParsing="false" onAction="#btnFind_OnAction" prefHeight="40.0" prefWidth="120.0" stylesheets="@../Resources/css/MainStyle.css" text="Find">
          <font>
             <Font name="Poppins SemiBold" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="buton" />
+            <String fx:value="color-orange" />
+         </styleClass>
       </Button>
       <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="15" />
    </children>

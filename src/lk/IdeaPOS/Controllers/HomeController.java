@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -28,7 +29,7 @@ import lk.IdeaPOS.Util.MessageBox;
 public class HomeController implements Initializable {
 
     @FXML
-    private LineChart<String, Double> chtSales;
+    private BarChart<String, Double> chtSales;
     @FXML
     private NumberAxis ySales;
     @FXML
@@ -39,6 +40,8 @@ public class HomeController implements Initializable {
     private Label lblReturnCount;
     @FXML
     private Label lblReorderlvl;
+    @FXML
+    private Label lblGrnCount;
 
     /**
      * Initializes the controller class.
@@ -47,9 +50,10 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         chtSales.getData().setAll(monthlySales());
         chtSales.setLegendVisible(false);
-        toDayOrders();
-        toDayReturns();
+        monthlyOrders();
+        monthlyReturns();
         reorderItems();
+        monthlyGRN();
     }
 
     private XYChart.Series monthlySales() {
@@ -68,9 +72,9 @@ public class HomeController implements Initializable {
         return null;
     }
 
-    private void toDayOrders() {
+    private void monthlyOrders() {
         try {
-            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(orderID) as orderCount FROM `Order` WHERE orderDate=DATE(now())");
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(orderID) as orderCount FROM `Order` WHERE MONTH(orderDate)=MONTH(now())");
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 lblOrderCount.setText(String.valueOf(rs.getInt("orderCount")));
@@ -80,9 +84,9 @@ public class HomeController implements Initializable {
         }
     }
     
-    private void toDayReturns(){
+    private void monthlyReturns(){
         try {
-            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(retID) as returnCount FROM CustomerReturn WHERE retDate=DATE(now())");
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(retID) as returnCount FROM CustomerReturn WHERE MONTH(retDate)=MONTH(now())");
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 lblReturnCount.setText(String.valueOf(rs.getInt("returnCount")));
@@ -98,6 +102,18 @@ public class HomeController implements Initializable {
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 lblReorderlvl.setText(String.valueOf(rs.getInt("reordrItem")));
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            MessageBox.showErrorMessage(ex.getMessage(), "Error");
+        }
+    }
+    
+    private void monthlyGRN(){
+        try {
+            PreparedStatement pst = DBUtil.getInstance().getConnection().prepareStatement("SELECT COUNT(grnID) AS grnCount FROM GRN WHERE MONTH(grnDate)=MONTH(NOW())");
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                lblGrnCount.setText(String.valueOf(rs.getInt("grnCount")));
             }
         } catch (ClassNotFoundException | SQLException ex) {
             MessageBox.showErrorMessage(ex.getMessage(), "Error");

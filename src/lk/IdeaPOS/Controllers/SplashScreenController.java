@@ -5,6 +5,7 @@
  */
 package lk.IdeaPOS.Controllers;
 
+import animatefx.animation.SlideOutDown;
 import com.jfoenix.controls.JFXProgressBar;
 import java.io.File;
 import java.net.URL;
@@ -50,8 +51,8 @@ public class SplashScreenController implements Initializable {
         pgsLoadingSystem.progressProperty().unbind();
         pgsLoadingSystem.progressProperty().bind(task.progressProperty());
         task.setOnSucceeded(e -> {
-            lblInfo.setText("All Done..");
             mainroot.toBack();
+            root.toBack();
             System.gc();
         });
         Thread thread = new Thread(task);
@@ -95,7 +96,6 @@ public class SplashScreenController implements Initializable {
             try{
             lblInfo.setText("Creating Configuration File..");
             new frmDbConfig().setVisible(true);
-            lblInfo.setText("Configuration File has been created..");
             }
             catch(IllegalStateException ex){
                 MessageBox.showErrorMessage(ex.getMessage(), "Error");

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64da60e9-6eb2-4f60-9dff-0e8138092897">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="127"/>
+	<property name="ireport.y" value="131"/>
 	<parameter name="fromDate" class="java.lang.String">
 		<defaultValueExpression><![CDATA["2020-04-30"]]></defaultValueExpression>
 	</parameter>
@@ -147,52 +147,36 @@ ORDER BY
 	</pageFooter>
 	<lastPageFooter>
 		<band height="216">
-			<pieChart>
-				<chart isShowLegend="true" renderType="draw">
-					<reportElement mode="Transparent" x="1" y="0" width="270" height="216" uuid="fbf8e1fa-edb8-4a3b-b687-8b1745ccf796"/>
-					<chartTitle>
-						<font fontName="Poppins SemiBold" size="12" isBold="true"/>
-						<titleExpression><![CDATA["Sold Items"]]></titleExpression>
-					</chartTitle>
+			<barChart>
+				<chart>
+					<reportElement x="0" y="0" width="554" height="216" uuid="21cc88bd-e5bb-418b-b66e-c150d66625ab"/>
+					<chartTitle/>
 					<chartSubtitle/>
-					<chartLegend>
-						<font size="5"/>
-					</chartLegend>
+					<chartLegend/>
 				</chart>
-				<pieDataset>
-					<keyExpression><![CDATA[$F{Item_itemName}]]></keyExpression>
-					<valueExpression><![CDATA[$F{OrderItem_qty}]]></valueExpression>
-				</pieDataset>
-				<piePlot isCircular="true">
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Sold Qty"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Item_itemName}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{OrderItem_qty}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Return Qty"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Item_itemName}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{Return_Count}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
 					<plot/>
-					<itemLabel>
-						<font size="5"/>
-					</itemLabel>
-				</piePlot>
-			</pieChart>
-			<pieChart>
-				<chart isShowLegend="true" renderType="draw">
-					<reportElement x="284" y="0" width="270" height="216" uuid="a56b4e1b-fc99-4090-80f3-005d155d5611"/>
-					<chartTitle>
-						<font fontName="Poppins SemiBold" size="12" isBold="true"/>
-						<titleExpression><![CDATA["Return Items"]]></titleExpression>
-					</chartTitle>
-					<chartSubtitle/>
-					<chartLegend>
-						<font size="5"/>
-					</chartLegend>
-				</chart>
-				<pieDataset>
-					<keyExpression><![CDATA[$F{Item_itemName}]]></keyExpression>
-					<valueExpression><![CDATA[$F{Return_Count}]]></valueExpression>
-				</pieDataset>
-				<piePlot>
-					<plot/>
-					<itemLabel>
-						<font size="5"/>
-					</itemLabel>
-				</piePlot>
-			</pieChart>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
 		</band>
 	</lastPageFooter>
 </jasperReport>

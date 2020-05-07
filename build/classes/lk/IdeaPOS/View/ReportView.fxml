@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="804.0" styleClass="primaryBackground-color" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.ReportViewController">
+<AnchorPane id="AnchorPane" prefHeight="555.0" prefWidth="804.0" styleClass="main-contener" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.ReportViewController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="555.0" prefWidth="804.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -30,7 +31,11 @@
                         <JFXComboBox fx:id="cmbType" labelFloat="true" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="164.0" promptText="Report Type" styleClass="jfx-text-field" />
                         <JFXDatePicker fx:id="dtpFrom" maxWidth="1.7976931348623157E308" overLay="true" promptText="From" GridPane.columnIndex="1" />
                         <JFXDatePicker fx:id="dtpTo" maxWidth="1.7976931348623157E308" overLay="true" promptText="To" GridPane.columnIndex="2" />
-                        <JFXButton fx:id="btnReport" maxWidth="1.7976931348623157E308" onAction="#btnReport_OnAction" prefHeight="30.0" prefWidth="89.0" styleClass="update-btn" text="Report" GridPane.columnIndex="3" />
+                        <JFXButton fx:id="btnReport" maxWidth="1.7976931348623157E308" onAction="#btnReport_OnAction" prefHeight="30.0" prefWidth="89.0" text="Report" GridPane.columnIndex="3">
+                           <styleClass>
+                              <String fx:value="color-pumkin" />
+                              <String fx:value="buton" />
+                           </styleClass></JFXButton>
                      </children>
                   </GridPane>
                </children></AnchorPane>

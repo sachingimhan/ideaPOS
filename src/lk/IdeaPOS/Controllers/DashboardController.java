@@ -61,8 +61,6 @@ public class DashboardController implements Initializable {
     @FXML
     private StackPane mainStackPane;
     @FXML
-    private JFXButton btnMainMinimize;
-    @FXML
     private JFXButton btnSetting;
     @FXML
     private Label lblUserStatus;
@@ -212,12 +210,6 @@ public class DashboardController implements Initializable {
             System.out.println(ex.getMessage());
         }
         return null;
-    }
-
-    @FXML
-    private void btnMainMinimize_OnAction(ActionEvent event) {
-        Stage window = (Stage) btnMainMinimize.getScene().getWindow();
-        window.setIconified(true);
     }
 
     AnchorPane setting;

@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="IdeaPOS.jar" size="270570" download="eager" />
+    <jar href="IdeaPOS.jar" size="268443" download="eager" />
     <jar href="lib/AbsoluteLayout.jar" size="2903" download="eager" />
     <jar href="lib/AnimateFX-1.2.1.jar" size="94267" download="eager" />
     <jar href="lib/barbecue-1.5-beta1.jar" size="91079" download="eager" />
