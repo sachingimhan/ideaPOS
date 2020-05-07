@@ -5,6 +5,7 @@
  */
 package lk.IdeaPOS.Util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,12 +23,12 @@ import lk.IdeaPOS.Model.DatabaseSetting;
 public class DBUtil {
 
     private static DBUtil util;
-    private final Connection connection;
+    private Connection connection = null;
 //    private final String url="jdbc:mysql://localhost:3306/ideaPOS";
 //    private final String user="root";
 //    private final String password="rockey@123";
 
-    private DBUtil() throws ClassNotFoundException, SQLException {
+    private DBUtil() throws ClassNotFoundException, NullPointerException, SQLException {
         DatabaseSetting rp = readProperties();
         Class.forName("org.mariadb.jdbc.Driver");
         connection = DriverManager.getConnection("jdbc:mysql://" + rp.getHost() + ":" + rp.getPort() + "/" + rp.getDbName() + "", rp.getUser(), rp.getPasswd());
@@ -45,18 +46,22 @@ public class DBUtil {
         //get currnt path
         String pwd = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
         try {
-            //
-            InputStream inputStream = new FileInputStream(pwd + "/Settings/Config.properties");
-            Properties p = new Properties();
-            p.load(inputStream);
-            System.out.println("Wor");
-            return new DatabaseSetting(
-                    p.getProperty("db.Host"),
-                    p.getProperty("db.User"),
-                    p.getProperty("db.Pass"),
-                    p.getProperty("db.Port"),
-                    p.getProperty("db.DbName")
-            );
+            File file = new File(pwd + "/Settings/Config.properties");
+            if (file.exists() && file.isFile()) {
+                InputStream inputStream = new FileInputStream(pwd + "/Settings/Config.properties");
+                Properties p = new Properties();
+                p.load(inputStream);
+                System.out.println("Wor");
+                return new DatabaseSetting(
+                        p.getProperty("db.Host"),
+                        p.getProperty("db.User"),
+                        p.getProperty("db.Pass"),
+                        p.getProperty("db.Port"),
+                        p.getProperty("db.DbName")
+                );
+            } else {
+                MessageBox.showErrorMessage("Database Configuratin Not Found", "Error");
+            }
         } catch (IOException ex) {
             MessageBox.showErrorMessage(ex.getLocalizedMessage(), "Error");
         }

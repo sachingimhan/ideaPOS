@@ -8,14 +8,21 @@ package lk.IdeaPOS.Controllers;
 import animatefx.animation.SlideInUp;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
+import java.nio.file.FileSystems;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -43,6 +50,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.IdeaPOS.Main;
+import lk.IdeaPOS.Model.BusinessDetails;
 import lk.IdeaPOS.Model.Item;
 import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Model.Order;
@@ -51,6 +60,14 @@ import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.Loader;
 import lk.IdeaPOS.Util.MessageBox;
 import lk.IdeaPOS.Util.MessageIconType;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -497,6 +514,7 @@ public class POSSystemController implements Initializable {
 
     @FXML
     private void btnHoldTran_OnAction(ActionEvent event) {
+
     }
 
     @FXML
@@ -542,6 +560,7 @@ public class POSSystemController implements Initializable {
                         orderItems
                 ));
                 if (insertOrder) {
+                    printBill(lblOrderID.getText());
                     MessageBox.show(3, lblMessage, "Payment Success.!", MessageIconType.INFORMATION);
                     clear();
                 }
@@ -569,5 +588,50 @@ public class POSSystemController implements Initializable {
         if (event.getCode() == KeyCode.DELETE) {
             deleteTableItem();
         }
+    }
+
+    private void printBill(String OrderID) {
+        try {
+            BusinessDetails rp = readProperties();
+            InputStream jasperStream = Main.class.getResourceAsStream("Reports/rptBill.jrxml");
+            JasperReport jr = JasperCompileManager.compileReport(jasperStream);
+            Map<String, Object> parm = new HashMap<>();
+            parm.put("orderID", OrderID);
+            parm.put("businessName", rp.getName());
+            parm.put("address", rp.getAddress());
+            parm.put("tel", rp.getContact());
+            parm.put("regNo", rp.getRegNo());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jr, parm, DBUtil.getInstance().getConnection());
+            //JasperViewer.viewReport(jasperPrint, false);
+            JasperPrintManager.printReport(jasperPrint, false);
+        } catch (ClassNotFoundException | SQLException | JRException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    private BusinessDetails readProperties() {
+        //get currnt path
+        String pwd = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
+        try {
+            File file = new File(pwd + "/Settings/BusinessData.properties");
+            if (file.exists()) {
+                InputStream inputStream = new FileInputStream(pwd + "/Settings/BusinessData.properties");
+                Properties properties = new Properties();
+                properties.load(inputStream);
+                return new BusinessDetails(
+                        properties.getProperty("biz.Name"),
+                        properties.getProperty("biz.Address"),
+                        properties.getProperty("biz.Contact"),
+                        properties.getProperty("biz.RegNo")
+                );
+            }
+            else{
+                MessageBox.showErrorMessage("BusinessData.properties Not Found.!", "Error");
+            }
+
+        } catch (IOException ex) {
+            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
+        }
+        return null;
     }
 }

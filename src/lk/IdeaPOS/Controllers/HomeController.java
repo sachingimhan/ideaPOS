@@ -10,8 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;
@@ -21,7 +19,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
-import lk.IdeaPOS.Util.MessageIconType;
 
 /**
  * FXML Controller class

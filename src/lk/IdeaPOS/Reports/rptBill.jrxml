@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="158" pageHeight="864" columnWidth="130" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="ed19834f-f487-4a31-81b5-52aa6c2babe5">
-	<property name="ireport.zoom" value="1.6105100000000008"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="158" pageHeight="250" whenNoDataType="BlankPage" columnWidth="130" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="ed19834f-f487-4a31-81b5-52aa6c2babe5">
+	<property name="ireport.zoom" value="3.636363636363639"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="218"/>
 	<parameter name="businessName" class="java.lang.String">
 		<defaultValueExpression><![CDATA["IdeaPOS System"]]></defaultValueExpression>
 	</parameter>
@@ -21,9 +21,20 @@
      `Order`.`netAmount` AS Order_netAmount,
      `Order`.`cash` AS Order_cash,
      `Order`.`balance` AS Order_balance,
-     Customer.`custName` AS Customer_custName
+     Customer.`custName` AS Customer_custName,
+     OrderItem.`orderID` AS OrderItem_orderID,
+     OrderItem.`description` AS OrderItem_description,
+     OrderItem.`unitPrice` AS OrderItem_unitPrice,
+     OrderItem.`qty` AS OrderItem_qty,
+     OrderItem.`discount` AS OrderItem_discount,
+     OrderItem.`subTotal` AS OrderItem_subTotal,
+     Item.`itemName` AS Item_itemName
 FROM
-     `Customer` Customer INNER JOIN `Order` `Order` ON Customer.`custID` = `Order`.`custID` WHERE `Order`.orderID=$P{orderID}]]>
+     `Customer` Customer INNER JOIN `Order` `Order` ON Customer.`custID` = `Order`.`custID`
+     INNER JOIN `OrderItem` OrderItem ON `Order`.`orderID` = OrderItem.`orderID`
+     INNER JOIN `Item` Item ON OrderItem.`itemCode` = Item.`itemCode`
+WHERE
+     `Order`.orderID = $P{orderID}]]>
 	</queryString>
 	<field name="Order_orderID" class="java.lang.String"/>
 	<field name="Order_orderDate" class="java.sql.Date"/>
@@ -33,6 +44,16 @@ FROM
 	<field name="Order_cash" class="java.math.BigDecimal"/>
 	<field name="Order_balance" class="java.math.BigDecimal"/>
 	<field name="Customer_custName" class="java.lang.String"/>
+	<field name="OrderItem_orderID" class="java.lang.String"/>
+	<field name="OrderItem_description" class="java.lang.String"/>
+	<field name="OrderItem_unitPrice" class="java.math.BigDecimal"/>
+	<field name="OrderItem_qty" class="java.math.BigDecimal"/>
+	<field name="OrderItem_discount" class="java.math.BigDecimal"/>
+	<field name="OrderItem_subTotal" class="java.math.BigDecimal"/>
+	<field name="Item_itemName" class="java.lang.String"/>
+	<variable name="Order_orderID_1" class="java.lang.Integer" resetType="Page" calculation="Count">
+		<variableExpression><![CDATA[$F{Order_orderID}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -41,57 +62,200 @@ FROM
 			<textField>
 				<reportElement x="0" y="0" width="130" height="14" uuid="f4b13abb-74f7-493d-a00f-446b8d52f6b0"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font fontName="Poppins Medium" size="8" isBold="true" isUnderline="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{businessName}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="14" width="130" height="12" uuid="5852ae8d-5618-4750-920f-fd9230abf166"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="5"/>
+					<font fontName="Poppins Light" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="26" width="76" height="12" uuid="4ba8efd9-84a6-423a-b1ac-722a0ed33e2f"/>
-				<textElement>
-					<font size="5"/>
+				<reportElement x="16" y="26" width="45" height="12" uuid="4ba8efd9-84a6-423a-b1ac-722a0ed33e2f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Poppins Light" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tel}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="76" y="27" width="54" height="11" uuid="cfac4b4c-7aea-45ac-8ebd-fd51af8cc094"/>
-				<textElement>
-					<font size="5"/>
+				<reportElement x="89" y="26" width="41" height="12" uuid="cfac4b4c-7aea-45ac-8ebd-fd51af8cc094"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Poppins Light" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{regNo}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="26" width="16" height="12" uuid="181f9fe4-3dae-422e-8adf-7fb68951537a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Poppins Light" size="8"/>
+				</textElement>
+				<text><![CDATA[Tel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="26" width="24" height="12" uuid="a97750fe-a532-40ad-837d-6db6b74044ea"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Poppins Light" size="8"/>
+				</textElement>
+				<text><![CDATA[Reg:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="38" width="130" height="1" uuid="4f5df6f3-3b2d-49a8-ada1-de7e0f3fb599"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="32" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="130" height="11" uuid="cade69a9-84ad-4a4e-bf97-3f1239eda8f5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+		<band height="43" splitType="Stretch">
+			<componentElement>
+				<reportElement x="12" y="0" width="111" height="29" uuid="c37d811c-dd38-4c0d-9365-a97305210b08"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code39 (Extended)" drawText="true" checksumRequired="false" evaluationTime="Report">
+					<jr:codeExpression><![CDATA[$F{Order_orderID}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="65" y="29" width="65" height="12" uuid="92959f69-1dbd-45cf-acca-fcbba1475429"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Poppins Light" size="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Order_orderID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="41" width="130" height="1" uuid="b3b3d0c8-8820-4937-9068-73088faf5005"/>
+			</line>
+			<textField evaluationTime="Page">
+				<reportElement x="31" y="29" width="21" height="12" uuid="37cab104-5c36-4724-a7b2-77f980001afc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Order_orderID_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="29" width="30" height="12" uuid="f1ed7bb1-2751-4747-b399-2c29f1839dfd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<text><![CDATA[Item Count:]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="41" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="129" height="10" uuid="a9c21b15-2ed3-4054-93d4-5ab04dff2669"/>
+				<textElement>
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Item_itemName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="22" y="11" width="28" height="10" uuid="bc1307fd-22c6-470f-b0bc-bf3c931c0d96"/>
+				<textElement>
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OrderItem_unitPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="11" width="18" height="10" uuid="27617d15-7def-48a9-b9d2-c16cc387eb95"/>
+				<textElement>
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OrderItem_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="11" width="18" height="10" uuid="1cd315e6-088f-49f0-9805-58b1f6656ba0"/>
+				<textElement>
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OrderItem_discount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="11" width="38" height="10" uuid="bab8d009-fc28-438b-a1e3-ad9cf32e5bf2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OrderItem_subTotal}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="71" y="3" width="59" height="10" uuid="b4955f32-75b5-401b-a292-ae2a4fcfeab6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Order_grossAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="31" y="3" width="40" height="8" uuid="db37f3a0-b0e2-4622-9bca-f8a7183ef109"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<text><![CDATA[Gross Amount:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="89" y="1" width="41" height="1" uuid="50efbf89-c957-4a4c-85dc-2a44f690d07f"/>
+			</line>
+			<textField>
+				<reportElement x="71" y="13" width="59" height="8" uuid="fcb1b794-ca78-4732-997c-eaee665baa8b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Poppins SemiBold" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Order_netAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="31" y="13" width="40" height="8" uuid="41c27610-10fc-4b21-8219-d7b1619ad21c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Poppins SemiBold" size="5"/>
+				</textElement>
+				<text><![CDATA[Net Amount:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="24" width="59" height="10" uuid="c820d1a9-0025-4dd1-987f-27b413aa15a2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Order_cash}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="31" y="24" width="40" height="10" uuid="c5856453-e8ab-4ca8-afed-0657881fd9ed"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<text><![CDATA[Cash:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="34" width="59" height="8" uuid="f5b7e532-8672-471e-a7e7-5ed7c8e761e0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins Light" size="5" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Order_balance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="31" y="34" width="40" height="8" uuid="195850a1-22ca-49cb-b2da-4853055e4631"/>
+				<textElement textAlignment="Right">
+					<font fontName="Poppins Light" size="5"/>
+				</textElement>
+				<text><![CDATA[Balance:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="89" y="22" width="41" height="1" uuid="c865ec69-0e56-45b0-a222-2f8370c6b0ec"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="46" width="130" height="10" uuid="3874abfb-ce20-4464-9b4a-f27f6383d1e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Thank You.! Come Again..]]></text>
+			</staticText>
+			<line>
+				<reportElement x="15" y="45" width="100" height="1" uuid="48e557f4-dda8-4ea6-a303-9f74d92a71f5"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
 	</summary>
 </jasperReport>

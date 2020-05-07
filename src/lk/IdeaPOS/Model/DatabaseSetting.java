@@ -10,11 +10,14 @@ package lk.IdeaPOS.Model;
  * @author root
  */
 public class DatabaseSetting {
+
     private String host;
     private String user;
     private String passwd;
     private String port;
     private String dbName;
+    private String backupPath;
+    private String mysqlDir;
 
     public DatabaseSetting() {
     }
@@ -27,6 +30,25 @@ public class DatabaseSetting {
         this.dbName = dbName;
     }
 
+    public DatabaseSetting(String host, String user, String passwd, String dbName, String backupPath, String mysqlDir) {
+        this.host = host;
+        this.user = user;
+        this.passwd = passwd;
+        this.dbName = dbName;
+        this.backupPath = backupPath;
+        this.mysqlDir = mysqlDir;
+    }
+
+    public DatabaseSetting(String host, String user, String passwd, String port, String dbName, String backupPath, String mysqlDir) {
+        this.host = host;
+        this.user = user;
+        this.passwd = passwd;
+        this.port = port;
+        this.dbName = dbName;
+        this.backupPath = backupPath;
+        this.mysqlDir = mysqlDir;
+    }
+    
     public String getDbName() {
         return dbName;
     }
@@ -67,10 +89,25 @@ public class DatabaseSetting {
         this.user = user;
     }
 
+    public String getBackupPath() {
+        return backupPath;
+    }
+
+    public void setBackupPath(String backupPath) {
+        this.backupPath = backupPath;
+    }
+
+    public String getMysqlDir() {
+        return mysqlDir;
+    }
+
+    public void setMysqlDir(String mysqlDir) {
+        this.mysqlDir = mysqlDir;
+    }
+
     @Override
     public String toString() {
-        return "DatabaseSetting{" + "host=" + host + ", user=" + user + ", passwd=" + passwd + ", port=" + port + ", dbName=" + dbName + '}';
+        return "DatabaseSetting{" + "host=" + host + ", user=" + user + ", passwd=" + passwd + ", port=" + port + ", dbName=" + dbName + ", backupPath=" + backupPath + ", mysqlDir=" + mysqlDir + '}';
     }
-    
-    
+
 }

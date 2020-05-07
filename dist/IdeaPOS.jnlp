@@ -8,9 +8,12 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="IdeaPOS.jar" size="220742" download="eager" />
+    <jar href="IdeaPOS.jar" size="270570" download="eager" />
+    <jar href="lib/AbsoluteLayout.jar" size="2903" download="eager" />
     <jar href="lib/AnimateFX-1.2.1.jar" size="94267" download="eager" />
+    <jar href="lib/barbecue-1.5-beta1.jar" size="91079" download="eager" />
     <jar href="lib/barcode4j-2.1.jar" size="274404" download="eager" />
+    <jar href="lib/beansbinding-1.2.1.jar" size="631289" download="eager" />
     <jar href="lib/com-jaspersoft-ireport-components.jar" size="1910653" download="eager" />
     <jar href="lib/com-jaspersoft-ireport-jasperserver.jar" size="1459780" download="eager" />
     <jar href="lib/com-jaspersoft-ireport.jar" size="11848679" download="eager" />
@@ -27,7 +30,9 @@
     <jar href="lib/iTextAsian.jar" size="331811" download="eager" />
     <jar href="lib/jasper-compiler-jdt.jar" size="1395272" download="eager" />
     <jar href="lib/jasperreports-5.0.1.jar" size="4218716" download="eager" />
+    <jar href="lib/jcommon-1.0.23.jar" size="330246" download="eager" />
     <jar href="lib/jfoenix-8.0.8.jar" size="2708772" download="eager" />
+    <jar href="lib/jfreechart-1.0.19.jar" size="1565065" download="eager" />
     <jar href="lib/log4j-1.2.15.jar" size="391834" download="eager" />
     <jar href="lib/mariadb-java-client-2.5.2.jar" size="618816" download="eager" />
   </resources>

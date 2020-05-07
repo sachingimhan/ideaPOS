@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0626a93d-ed78-421f-96a9-1ae4059bee2f">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="8"/>
+	<parameter name="fromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-04-30"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="toDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-05-05"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     `Order`.`orderID` AS Order_orderID,
+     `Order`.`orderDate` AS Order_orderDate,
+     `Order`.`paymentMethod` AS Order_paymentMethod,
+     `Order`.`grossAmount` AS Order_grossAmount,
+     `Order`.`netAmount` AS Order_netAmount,
+     `Order`.`cash` AS Order_cash,
+     `Order`.`balance` AS Order_balance,
+     Customer.`custName` AS Customer_custName,
+     User.`userName` AS User_userName
+FROM
+     `Customer` Customer INNER JOIN `Order` `Order` ON Customer.`custID` = `Order`.`custID`
+     INNER JOIN `User` User ON `Order`.`userID` = User.`userID`
+WHERE
+	`Order`.orderDate BETWEEN $P{fromDate} AND $P{toDate}]]>
+	</queryString>
+	<field name="Order_orderID" class="java.lang.String"/>
+	<field name="Order_orderDate" class="java.sql.Date"/>
+	<field name="Order_paymentMethod" class="java.lang.String"/>
+	<field name="Order_grossAmount" class="java.math.BigDecimal"/>
+	<field name="Order_netAmount" class="java.math.BigDecimal"/>
+	<field name="Order_cash" class="java.math.BigDecimal"/>
+	<field name="Order_balance" class="java.math.BigDecimal"/>
+	<field name="Customer_custName" class="java.lang.String"/>
+	<field name="User_userName" class="java.lang.String"/>
+	<variable name="TatalAmount" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Order_netAmount}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="34" uuid="8eed14d2-59e3-47fa-bbc1-4e3aae100a21"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poppins Medium" size="20"/>
+				</textElement>
+				<text><![CDATA[Order Detail Report]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="35" width="555" height="1" uuid="d765f2b6-b749-4c3b-80f6-41a22c184c13"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<textField pattern="yyyy.MMMMM.dd GGG hh:mm aaa">
+				<reportElement x="388" y="2" width="167" height="20" uuid="6663cca8-057c-4f97-9d9f-f0f64e8fbe6e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="23" width="555" height="1" uuid="f6aea64c-7ef5-4473-acaa-b1192a3507ae"/>
+			</line>
+			<textField>
+				<reportElement x="32" y="2" width="100" height="20" uuid="74537445-c7be-4563-ae27-609283c0d1ce"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fromDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="2" width="100" height="20" uuid="6d5fdaed-eab5-4b84-9fe3-0a9a58c12ba1"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{toDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="2" width="31" height="20" uuid="bcf3d4a8-7865-4957-a97b-541f38308421"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[From:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="2" width="16" height="20" uuid="78ac9609-1657-4202-b0bd-e27842ef34f2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[To:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="3" width="68" height="20" uuid="1150b921-44e3-4490-a0f8-88511957d4cb"/>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="3" width="94" height="20" uuid="02df62b7-664d-4237-a1b5-37088225d23b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Customer Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="3" width="94" height="20" uuid="d1e8fca7-be31-4cca-a333-47eea47b5221"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[User Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="3" width="100" height="20" uuid="92f4c599-4d01-4730-a226-4343c37151d7"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Gross Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="3" width="100" height="20" uuid="bee95027-2290-4bcd-9e49-5260aba7dde3"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Net Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="23" width="555" height="1" uuid="d9a6c840-c261-43a0-b4c9-da072ddc1fc2"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="68" height="20" uuid="1f960866-8010-4a23-8745-8bf544fd0676"/>
+				<textFieldExpression><![CDATA[$F{Order_orderID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="131" height="20" uuid="ad9ff86f-04f4-4913-aa1e-3383b7b8af05"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Customer_custName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="94" height="20" uuid="33014095-90ca-49e1-a21d-872e5caca933"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{User_userName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="0" width="100" height="20" uuid="1f53ab6a-adb0-4793-89b2-12e79a71eb3c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Order_grossAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="29a0e9a4-1990-4710-b3cf-90eb4d723e59"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{Order_netAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="197">
+			<lineChart>
+				<chart>
+					<reportElement x="1" y="0" width="554" height="197" uuid="a82b6b91-a09c-45ef-b8da-b8e620fee915"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Daily Basis Sales Chart"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Order_orderDate}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{Order_netAmount}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="5" width="100" height="20" uuid="4fad3d12-89e8-4aff-9d79-98291cc022d7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{TatalAmount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="455" y="3" width="100" height="1" uuid="8264e6ca-0824-4085-bbeb-64bb878f5fa9"/>
+			</line>
+			<line>
+				<reportElement x="455" y="25" width="100" height="1" uuid="fb199326-6830-4eb7-bc3e-7cf423f3ab8f"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="340" y="6" width="100" height="20" uuid="e860e88a-aa60-4540-b4ca-f58959acaa4d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Amount :]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

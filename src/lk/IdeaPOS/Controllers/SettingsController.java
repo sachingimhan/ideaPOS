@@ -10,10 +10,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.FileSystems;
@@ -39,11 +37,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Model.User;
 import lk.IdeaPOS.Util.DBUtil;
 import lk.IdeaPOS.Util.MessageBox;
 import lk.IdeaPOS.Util.MessageIconType;
+import lk.IdeaPOS.View.frmDbConfig;
 
 /**
  * FXML Controller class
@@ -103,7 +103,6 @@ public class SettingsController implements Initializable {
     private JFXTextField txtBusinessName;
     @FXML
     private JFXTextField txtBissReg;
-    private JFXTextField txtLogoPath;
     @FXML
     private JFXButton btnSave;
     @FXML
@@ -113,17 +112,7 @@ public class SettingsController implements Initializable {
     @FXML
     private AnchorPane root;
     @FXML
-    private JFXTextField txtDbHost;
-    @FXML
-    private JFXTextField txtDbUser;
-    @FXML
-    private JFXPasswordField txtDbPassword;
-    @FXML
-    private JFXButton btnConfigDb;
-    @FXML
-    private JFXTextField txtDbName;
-    @FXML
-    private JFXTextField txtDbPort;
+    private JFXButton btnDatabaseConfig;
 
     /**
      * Initializes the controller class.
@@ -190,24 +179,6 @@ public class SettingsController implements Initializable {
         });
         //---------------------------
         getUserID();
-        readProperties();
-    }
-
-    private void readProperties() {
-        //get currnt path
-        String pwd = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
-        try {
-            //
-            InputStream inputStream = new FileInputStream(pwd + "/Settings/BusinessData.properties");
-            Properties properties = new Properties();
-            properties.load(inputStream);
-            txtBusinessName.setText(properties.getProperty("biz.Name"));
-            txtBizAddress.setText(properties.getProperty("biz.Address"));
-            txtBizContactNo.setText(properties.getProperty("biz.Contact"));
-            txtBissReg.setText(properties.getProperty("biz.RegNo"));
-        } catch (IOException ex) {
-            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
-        }
     }
 
     private boolean activeStateChange(String userID) {
@@ -454,7 +425,6 @@ public class SettingsController implements Initializable {
     @FXML
     private void btnSave_OnAction(ActionEvent event) {
         createProperties();
-        readProperties();
     }
 
     private void createProperties() {
@@ -479,32 +449,7 @@ public class SettingsController implements Initializable {
     }
 
     @FXML
-    private void btnConfigDb_OnAction(ActionEvent event) {
-        ConfigDB();
+    private void btnDatabaseConfig_OnAction(ActionEvent event) {
+        new frmDbConfig().setVisible(true);
     }
-
-    private void ConfigDB() {
-        //get currnt path
-        String pwd = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
-        // Create Settings Folder
-        File file = new File("Settings");
-        file.mkdir();
-        try {
-            //
-            if (MessageBox.showConfMessage("Warning: This will Break Your System. Continue?", "Warning.!")) {
-                OutputStream outputStream = new FileOutputStream(pwd + "/Settings/Config.properties");
-                Properties properties = new Properties();
-                properties.setProperty("db.Host", txtDbHost.getText());
-                properties.setProperty("db.User", txtDbUser.getText());
-                properties.setProperty("db.Pass", txtDbPassword.getText());
-                properties.setProperty("db.Port", txtDbPort.getText());
-                properties.setProperty("db.DbName", txtDbName.getText());
-                properties.store(outputStream, LocalDate.now().toString());
-                MessageBox.show(3, lblMessage, "Data Saved.!", MessageIconType.INFORMATION);
-            }
-        } catch (IOException ex) {
-            MessageBox.show(3, lblMessage, ex.getLocalizedMessage(), MessageIconType.ERROR);
-        }
-    }
-
 }

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64da60e9-6eb2-4f60-9dff-0e8138092897">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="127"/>
+	<parameter name="fromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-04-30"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="toDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-05-05"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     SUM(OrderItem.`qty`) AS OrderItem_qty,
+     Item.`itemName` AS Item_itemName,
+     Item.`itemCode` AS Item_itemCode,
+     coalesce(sum(ReturnItem.returnQty),0) AS Return_Count
+FROM
+     `Item` Item INNER JOIN `OrderItem` OrderItem ON Item.`itemCode` = OrderItem.`itemCode`
+     INNER JOIN `Order` `Order` ON OrderItem.`orderID` = `Order`.`orderID` 
+     LEFT JOIN `CustomerReturn` CustomerReturn ON `Order`.`orderID`= CustomerReturn.`orderID`
+     LEFT JOIN `ReturnItem` ReturnItem ON CustomerReturn.`retID`=ReturnItem.`retID`
+WHERE 
+	`Order`.orderDate BETWEEN $P{fromDate} AND $P{toDate}
+GROUP BY
+     Item.`itemCode`
+ORDER BY
+     OrderItem_qty DESC;]]>
+	</queryString>
+	<field name="OrderItem_qty" class="java.math.BigDecimal"/>
+	<field name="Item_itemName" class="java.lang.String"/>
+	<field name="Item_itemCode" class="java.lang.String"/>
+	<field name="Return_Count" class="java.math.BigDecimal"/>
+	<title>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="555" height="38" uuid="248da09c-0296-4a42-b930-8e5c70d94d36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Poppins SemiBold" size="20"/>
+				</textElement>
+				<text><![CDATA[Item Sales and Deamnd Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="3" width="31" height="20" uuid="b3cc1372-1d27-4767-b2e2-a2c1ed03432c"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[From:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="157" y="3" width="100" height="20" uuid="a1d13090-200e-40d8-bd72-c27b009b671e"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{toDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="3" width="100" height="20" uuid="e33f7163-1c28-4c45-8705-b01ee0a94fdc"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fromDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="3" width="16" height="20" uuid="e18a4ef3-2701-4d0b-9005-efea30e25583"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[To:]]></text>
+			</staticText>
+			<textField pattern="yyyy.MMMMM.dd GGG hh:mm aaa">
+				<reportElement x="388" y="3" width="167" height="20" uuid="fa74e4c9-0522-4a46-9b58-2377a7ac6096"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="0" width="554" height="1" uuid="fff4a57f-5e0d-4ca4-a497-b98bd78f22f6"/>
+			</line>
+			<line>
+				<reportElement x="1" y="25" width="554" height="1" uuid="a6106521-5cf1-49c7-a802-397f26a72300"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="1" width="100" height="20" uuid="11c54437-1866-45b2-85e5-7756a6c12704"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Code]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="554" height="1" uuid="442f3828-7fa1-4399-a137-1c442a3a130c"/>
+			</line>
+			<staticText>
+				<reportElement x="113" y="1" width="218" height="20" uuid="7634e9b0-d3d2-48f9-a342-9d03ec0bbe68"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="1" width="100" height="20" uuid="56d0771c-fee8-44b5-9cc8-02424ff954fe"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sold Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="1" width="100" height="20" uuid="230caae8-62f6-4b7b-ad2c-2138ae7f54e1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Return Qty]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="100" height="20" uuid="541bd4fb-0b76-47d3-9020-a3f7aaf145ec"/>
+				<textFieldExpression><![CDATA[$F{Item_itemCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="0" width="218" height="20" uuid="93390d6e-276b-4ad6-ac5f-e23a278e5dfa"/>
+				<textFieldExpression><![CDATA[$F{Item_itemName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="342" y="0" width="100" height="20" uuid="21d406da-91e6-4b6a-bafe-78b949935ccd"/>
+				<textFieldExpression><![CDATA[$F{OrderItem_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="0" width="100" height="20" uuid="d6f9f3ba-9fc8-4d4f-bda0-d16e584eb38c"/>
+				<textFieldExpression><![CDATA[$F{Return_Count}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField>
+				<reportElement x="454" y="1" width="100" height="20" uuid="7d4ecd2a-cf82-4786-90fa-4d28abf12b21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="216">
+			<pieChart>
+				<chart isShowLegend="true" renderType="draw">
+					<reportElement mode="Transparent" x="1" y="0" width="270" height="216" uuid="fbf8e1fa-edb8-4a3b-b687-8b1745ccf796"/>
+					<chartTitle>
+						<font fontName="Poppins SemiBold" size="12" isBold="true"/>
+						<titleExpression><![CDATA["Sold Items"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend>
+						<font size="5"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{Item_itemName}]]></keyExpression>
+					<valueExpression><![CDATA[$F{OrderItem_qty}]]></valueExpression>
+				</pieDataset>
+				<piePlot isCircular="true">
+					<plot/>
+					<itemLabel>
+						<font size="5"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+			<pieChart>
+				<chart isShowLegend="true" renderType="draw">
+					<reportElement x="284" y="0" width="270" height="216" uuid="a56b4e1b-fc99-4090-80f3-005d155d5611"/>
+					<chartTitle>
+						<font fontName="Poppins SemiBold" size="12" isBold="true"/>
+						<titleExpression><![CDATA["Return Items"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend>
+						<font size="5"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{Item_itemName}]]></keyExpression>
+					<valueExpression><![CDATA[$F{Return_Count}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel>
+						<font size="5"/>
+					</itemLabel>
+				</piePlot>
+			</pieChart>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -10,13 +10,22 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXButton;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileSystems;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.IdeaPOS.Model.DatabaseSetting;
 import lk.IdeaPOS.Model.LoginDetail;
 import lk.IdeaPOS.Util.Loader;
 import lk.IdeaPOS.Util.MessageBox;
@@ -121,7 +131,7 @@ public class DashboardController implements Initializable {
     private void btnMainSuppliers_OnActin(ActionEvent event) throws IOException {
         FXMLLoader loadeFXML = new Loader().loadeFXML("View/Supplier.fxml");
         supplier = loadeFXML.load();
-        SupplierController controller=loadeFXML.<SupplierController>getController();
+        SupplierController controller = loadeFXML.<SupplierController>getController();
         controller.setLogin(login);
         new SlideInUp(supplier).play();
         rootMain.getChildren().setAll(supplier);
@@ -132,8 +142,8 @@ public class DashboardController implements Initializable {
     @FXML
     private void btnMainItem_OnAction(ActionEvent event) throws IOException {
         FXMLLoader loadeFXML = new Loader().loadeFXML("View/Item.fxml");
-        item=loadeFXML.load();
-        ItemController controller=loadeFXML.<ItemController>getController();
+        item = loadeFXML.load();
+        ItemController controller = loadeFXML.<ItemController>getController();
         controller.setLogin(login);
         new SlideInRight(item).play();
         rootMain.getChildren().setAll(item);
@@ -154,7 +164,54 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void exitMainButton_OnAction(ActionEvent event) {
-        System.exit(0);
+        if (MessageBox.showConfMessage("Do you want to Exit?", "Confirmation")) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        backupDb();
+                    } catch (IOException | InterruptedException ex) {
+                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+            Platform.exit();
+        }
+
+    }
+
+    private void backupDb() throws IOException, InterruptedException {
+        DatabaseSetting rp = readProperties();
+        String path = rp.getBackupPath();
+        File file = new File(path);
+        file.mkdir();
+        String p = path + "db_" + LocalDateTime.now().toLocalDate().toString() + LocalDateTime.now().getHour() + "-" + LocalDateTime.now().getMinute() + "-" + LocalDateTime.now().getSecond() + ".sql";
+        String cmd = rp.getMysqlDir() + "mysqldump -u " + rp.getUser() + " -p" + rp.getPasswd() + " -B " + rp.getDbName() + " -r " + p;
+        Runtime runtime = Runtime.getRuntime();
+        Process exec = runtime.exec(cmd);
+        exec.waitFor();
+    }
+
+    private DatabaseSetting readProperties() {
+        //get currnt path
+        String pwd = FileSystems.getDefault().getPath("").toAbsolutePath().toString();
+        try {
+            //
+            InputStream inputStream = new FileInputStream(pwd + "/Settings/Config.properties");
+            Properties properties = new Properties();
+            properties.load(inputStream);
+            return new DatabaseSetting(
+                    properties.getProperty("db.Host"),
+                    properties.getProperty("db.User"),
+                    properties.getProperty("db.Pass"),
+                    properties.getProperty("db.DbName"),
+                    properties.getProperty("db.backupPath"),
+                    properties.getProperty("db.mysqlDir")
+            );
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
     @FXML
@@ -164,10 +221,11 @@ public class DashboardController implements Initializable {
     }
 
     AnchorPane setting;
+
     @FXML
     private void btnSetting_OnAction(ActionEvent event) throws IOException {
         FXMLLoader loadeFXML = new Loader().loadeFXML("View/Settings.fxml");
-        setting=loadeFXML.load();
+        setting = loadeFXML.load();
         new SlideInRight(setting).play();
         rootMain.getChildren().setAll(setting);
     }

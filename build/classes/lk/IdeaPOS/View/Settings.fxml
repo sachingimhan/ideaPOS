@@ -31,7 +31,7 @@
                      <children>
                         <GridPane hgap="10.0" layoutX="14.0" layoutY="34.0" prefHeight="141.0" prefWidth="776.0" vgap="20.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                            <columnConstraints>
-                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
@@ -61,6 +61,11 @@
                                  </font>
                               </JFXTextField>
                               <JFXButton fx:id="btnSave" onAction="#btnSave_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="save-btn" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="Poppins SemiBold" size="15.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="btnDatabaseConfig" onAction="#btnDatabaseConfig_OnAction" prefHeight="37.0" prefWidth="217.0" styleClass="update-btn" text="Database Configuration" GridPane.rowIndex="2">
                                  <font>
                                     <Font name="Poppins SemiBold" size="15.0" />
                                  </font>
@@ -200,57 +205,6 @@
                            </font>
                         </JFXButton>
                      </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Database Settings">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <GridPane hgap="10.0" layoutY="44.0" prefHeight="150.0" prefWidth="774.0" vgap="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
-                           <columnConstraints>
-                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <JFXTextField fx:id="txtDbHost" labelFloat="true" prefHeight="30.0" prefWidth="701.0" promptText="Host" stylesheets="@../Resources/css/MainStyle.css">
-                                 <font>
-                                    <Font name="Poppins Light" size="15.0" />
-                                 </font>
-                              </JFXTextField>
-                              <JFXTextField fx:id="txtDbUser" labelFloat="true" prefHeight="30.0" prefWidth="701.0" promptText="User" stylesheets="@../Resources/css/MainStyle.css" GridPane.columnIndex="1">
-                                 <font>
-                                    <Font name="Poppins Light" size="15.0" />
-                                 </font>
-                              </JFXTextField>
-                              <JFXTextField fx:id="txtDbPort" labelFloat="true" prefHeight="30.0" prefWidth="701.0" promptText="Port" stylesheets="@../Resources/css/MainStyle.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="Poppins Light" size="15.0" />
-                                 </font>
-                              </JFXTextField>
-                              <JFXButton fx:id="btnConfigDb" onAction="#btnConfigDb_OnAction" prefHeight="40.0" prefWidth="120.0" styleClass="save-btn" text="Configure" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font name="Poppins SemiBold" size="15.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXTextField fx:id="txtDbName" labelFloat="true" prefHeight="30.0" prefWidth="701.0" promptText="Database Name" stylesheets="@../Resources/css/MainStyle.css" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font name="Poppins Light" size="15.0" />
-                                 </font>
-                              </JFXTextField>
-                              <JFXPasswordField fx:id="txtDbPassword" focusColor="#097541" labelFloat="true" prefHeight="26.0" prefWidth="300.0" promptText="Password" stylesheets="@../Resources/css/MainStyle.css" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="Poppins Light" size="15.0" />
-                                 </font>
-                              </JFXPasswordField>
-                           </children>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
               </content>
             </Tab>
          </tabs>

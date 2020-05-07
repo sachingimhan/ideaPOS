@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,7 +64,15 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            FXMLLoader loadeFXML = new Loader().loadeFXML("View/SplashScreen.fxml");
+            StackPane load = loadeFXML.load();
+            loginStack.getChildren().add(load);
+            SplashScreenController controller = loadeFXML.<SplashScreenController>getController();
+            controller.run();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -126,7 +136,7 @@ public class LoginController implements Initializable {
             if (rs.next()) {
                 return new LoginDetail(rs.getString("userID"), rs.getString("userName"), rs.getString("role"), rs.getBoolean("activeState"));
             }
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (NullPointerException | ClassNotFoundException | SQLException ex) {
             MessageBox.show(3, lblError, ex.getLocalizedMessage(), MessageIconType.ERROR);
         }
         return null;

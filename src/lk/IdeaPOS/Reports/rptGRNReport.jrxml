@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="93fa145c-36a1-44ba-a440-c96a7d45e99e">
+	<property name="ireport.zoom" value="1.3310000000000024"/>
+	<property name="ireport.x" value="81"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fromDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-04-30"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="toDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2020-05-05"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     GRN.`grnID` AS GRN_grnID,
+     GRN.`batchNo` AS GRN_batchNo,
+     GRN.`grnDate` AS GRN_grnDate,
+     GRN.`qty` AS GRN_qty,
+     GRN.`unitPrice` AS GRN_unitPrice,
+     GRN.`totalCost` AS GRN_totalCost,
+     GRN.`mdf` AS GRN_mdf,
+     GRN.`expiryDate` AS GRN_expiryDate,
+     GRN.`isConformed` AS GRN_isConformed,
+     Item.`itemName` AS Item_itemName,
+     Supplier.`name` AS Supplier_name,
+     User.`userName` AS User_userName
+FROM
+     `Item` Item INNER JOIN `GRN` GRN ON Item.`itemCode` = GRN.`itemCode`
+     INNER JOIN `Supplier` Supplier ON GRN.`supplierID` = Supplier.`supplierID`
+     INNER JOIN `User` User ON GRN.`userID` = User.`userID`
+WHERE
+     GRN.grnDate BETWEEN $P{fromDate}AND$P{toDate}]]>
+	</queryString>
+	<field name="GRN_grnID" class="java.lang.String"/>
+	<field name="GRN_batchNo" class="java.lang.String"/>
+	<field name="GRN_grnDate" class="java.sql.Date"/>
+	<field name="GRN_qty" class="java.lang.Integer"/>
+	<field name="GRN_unitPrice" class="java.math.BigDecimal"/>
+	<field name="GRN_totalCost" class="java.math.BigDecimal"/>
+	<field name="GRN_mdf" class="java.sql.Date"/>
+	<field name="GRN_expiryDate" class="java.sql.Date"/>
+	<field name="GRN_isConformed" class="java.lang.Boolean"/>
+	<field name="Item_itemName" class="java.lang.String"/>
+	<field name="Supplier_name" class="java.lang.String"/>
+	<field name="User_userName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="38" uuid="0cf9a6c5-a4e5-4ac8-aaff-2c59cb7b5d49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Poppins SemiBold" size="20"/>
+				</textElement>
+				<text><![CDATA[Good Received Note]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="38" width="801" height="1" uuid="081ea045-a7dd-4591-b7e4-25b710b7d562"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="32" y="0" width="100" height="20" uuid="01d35ab7-02ed-442a-890f-2ca7adea3289"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fromDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy.MMMMM.dd GGG hh:mm aaa">
+				<reportElement x="635" y="0" width="167" height="20" uuid="35f63502-b42c-4cbe-9c09-7382a7572c5f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="0" width="100" height="20" uuid="4bfbf919-f3f0-4580-b627-dbbf412e6968"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{toDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="0" width="16" height="20" uuid="8ae87a5d-09aa-4371-820f-a8f11f15a027"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[To:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="0" width="31" height="20" uuid="d1dcb347-6742-43cf-8f0e-82e5928e2f47"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[From:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="19" width="803" height="1" uuid="1dd7c108-9901-41d5-b664-895157115498"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="100" height="20" uuid="4e978fec-ed9f-4283-95ce-1d560ee2d849"/>
+				<text><![CDATA[GRN ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="0" width="100" height="20" uuid="64fa42c7-d7b2-401c-ad3f-1e73a369981a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[GRN Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="0" width="100" height="20" uuid="8d561ec1-948f-4c55-9bdd-ef42fa683ede"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[GRN Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="601" y="0" width="100" height="20" uuid="a1d92d6e-fef3-49b7-9411-1a990e73aedf"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[GRN UnitPrice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="0" width="100" height="20" uuid="32116694-0ffb-4615-893b-9d091c1f1302"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[GRN Total Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="0" width="100" height="20" uuid="2556e5bc-97ff-4a34-a867-c8da30f6ec20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="0" width="100" height="20" uuid="43dd1191-f2d8-4d18-9fef-b8103ce686e9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Supplier Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="0" width="100" height="20" uuid="7f3ed035-9ff4-4501-bba8-63624d683ad5"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[User Name]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="20" width="801" height="1" uuid="fe1f5bb6-f416-4ab2-8f98-5a5952005027"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="5c8c1a1c-d0fc-4afd-b3db-85f1feb578e2"/>
+				<textFieldExpression><![CDATA[$F{GRN_grnID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="20" uuid="bb7f3787-a3de-476e-b569-efef0c59d89d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GRN_qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="20" uuid="e0d483ea-2314-4c18-a085-74c2022ad049"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{GRN_unitPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="0" width="100" height="20" uuid="c002e0e5-e126-40af-950a-8e01c1f1695d"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GRN_totalCost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="f6a64f0c-1c8a-455e-85ab-faf95135e663"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{GRN_grnDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="bc5a5206-2138-4c77-a3f7-84d1e3791c50"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Item_itemName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="85e309bb-d2d9-4efc-9c88-02e787222a7c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Supplier_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="fe9b71e6-0bf8-413c-bf55-4a1477ae92c7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{User_userName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="702" y="0" width="100" height="20" uuid="c641b995-3cd5-46e1-9cd7-b64e6d850416"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
