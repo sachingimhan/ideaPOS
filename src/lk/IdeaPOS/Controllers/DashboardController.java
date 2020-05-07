@@ -163,16 +163,16 @@ public class DashboardController implements Initializable {
     @FXML
     private void exitMainButton_OnAction(ActionEvent event) {
         if (MessageBox.showConfMessage("Do you want to Exit?", "Confirmation")) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        backupDb();
-                    } catch (IOException | InterruptedException ex) {
-                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        backupDb();
+//                    } catch (IOException | InterruptedException ex) {
+//                        Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            });
             Platform.exit();
         }
 

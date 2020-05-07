@@ -125,3 +125,33 @@ Dashboard Css
 .glyph-red{
     -fx-fill: #C20114;
 }
+
+/*table view */
+.table-view{
+    -fx-background-color: #353b48;
+}
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: #2c3e50;
+}
+.table-view .column-header .label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold; 
+    -fx-alignment: CENTER;
+}
+.table-row-cell:odd{
+    -fx-background-color: #353b48;
+}
+.table-row-cell:even{
+    -fx-background-color: #2f3640;
+}
+.table-row-cell:selected{
+    -fx-background-color: #2980b9;
+}
+.table-view .cell{
+    -fx-font-family:Poppins Light;
+    -fx-font-size:15px;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #dcdde1;
+    -fx-border-color: transparent;
+}
