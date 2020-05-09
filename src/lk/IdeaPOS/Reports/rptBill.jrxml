@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="158" pageHeight="250" whenNoDataType="BlankPage" columnWidth="130" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="ed19834f-f487-4a31-81b5-52aa6c2babe5">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="158" pageHeight="250" whenNoDataType="AllSectionsNoDetail" columnWidth="130" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" uuid="ed19834f-f487-4a31-81b5-52aa6c2babe5">
 	<property name="ireport.zoom" value="3.636363636363639"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="218"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="businessName" class="java.lang.String">
 		<defaultValueExpression><![CDATA["IdeaPOS System"]]></defaultValueExpression>
 	</parameter>

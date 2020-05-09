@@ -181,7 +181,7 @@ public class DashboardController implements Initializable {
         File file = new File(path);
         file.mkdir();
         String p = path + "db_" + LocalDateTime.now().toLocalDate().toString() + LocalDateTime.now().getHour() + "-" + LocalDateTime.now().getMinute() + "-" + LocalDateTime.now().getSecond() + ".sql";
-        String cmd = rp.getMysqlDir() + "mysqldump -u " + rp.getUser() + " -p" + rp.getPasswd() + " -B " + rp.getDbName() + " -r " + p;
+        String cmd = rp.getMysqlDir() + "mysqldump --no-create-info -u " + rp.getUser() + " -p" + rp.getPasswd() + " -B " + rp.getDbName() + " -r " + p;
         Runtime runtime = Runtime.getRuntime();
         Process exec = runtime.exec(cmd);
         exec.waitFor();

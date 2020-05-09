@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXProgressBar?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="mainroot" styleClass="color-orange" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.SplashScreenController">
+<StackPane fx:id="mainroot" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="555.0" prefWidth="804.0" styleClass="color-orange" stylesheets="@../Resources/css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.IdeaPOS.Controllers.SplashScreenController">
    <children>
       <AnchorPane id="AnchorPane" fx:id="root" prefHeight="400.0" prefWidth="600.0" styleClass="color-orange" stylesheets="@../Resources/css/MainStyle.css">
          <children>
@@ -16,6 +20,28 @@
                   <Font name="Poppins Light" size="13.0" />
                </font>
             </Label>
+            <GridPane layoutX="250.0" layoutY="185.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="316.0" prefWidth="572.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" graphicTextGap="30.0" layoutX="101.0" layoutY="130.0" prefHeight="255.0" prefWidth="603.0" styleClass="text" text="Idea POS System Easy Sales Manager." textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="130.0">
+                           <font>
+                              <Font name="Poppins Regular" size="40.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="LIGHTBULB_ALT" size="250" styleClass="slid-menu-glyph-icon" textAlignment="CENTER" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
    </children>

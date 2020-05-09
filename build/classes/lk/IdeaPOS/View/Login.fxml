@@ -9,7 +9,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
@@ -17,52 +19,64 @@
    <children>
       <AnchorPane fx:id="AnchorLogin" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" styleClass="slid-menu" stylesheets="@../Resources/css/MainStyle.css">
          <children>
-            <Pane fx:id="loginPane" layoutX="492.0" layoutY="103.0" prefHeight="379.0" prefWidth="452.0" AnchorPane.rightAnchor="80.0">
-               <children>
-                  <JFXTextField fx:id="txtUserName" focusColor="#097541" labelFloat="true" layoutX="80.0" layoutY="224.0" onAction="#txtUserName_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="User Name" styleClass="jfx-text-field-white" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE">
-                     <font>
-                        <Font name="Poppins Light" size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXPasswordField fx:id="txtPassword" focusColor="#097541" labelFloat="true" layoutX="80.0" layoutY="279.0" onAction="#txtPassword_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="Password" styleClass="jfx-text-field-white" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE">
-                     <font>
-                        <Font name="Poppins Light" size="15.0" />
-                     </font>
-                  </JFXPasswordField>
-                  <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="80.0" layoutY="339.0" onAction="#btnLogin_OnAction" prefHeight="32.0" prefWidth="300.0" stylesheets="@../Resources/css/MainStyle.css" text="Login" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Poppins Light" size="15.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="buton" />
-                        <String fx:value="buton-delete" />
-                     </styleClass>
-                  </JFXButton>
-                  <Label contentDisplay="TOP" graphicTextGap="0.0" layoutX="187.0" layoutY="56.0" style="-fx-text-fill: #FFFFFF;" text="Login" textAlignment="CENTER">
-                     <font>
-                        <Font name="Poppins Black" size="30.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <graphic>
-                        <FontAwesomeIconView fill="WHITE" fontSmoothingType="LCD" glyphName="LOCK" size="100" textAlignment="CENTER" />
-                     </graphic>
-                  </Label>
-                  <FontAwesomeIconView fill="#455a64" glyphName="USER" layoutX="55.0" layoutY="252.0" size="20" styleClass="slid-menu-glyph-icon" />
-                  <FontAwesomeIconView fill="#455a64" glyphName="KEY" layoutX="55.0" layoutY="305.0" size="20" styleClass="slid-menu-glyph-icon" />
-               </children>
-            </Pane>
-            <Separator layoutX="486.0" layoutY="71.0" orientation="VERTICAL" prefHeight="472.0" prefWidth="3.0" AnchorPane.bottomAnchor="57.0" AnchorPane.rightAnchor="532.0" AnchorPane.topAnchor="71.0" />
-            <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="574.0" layoutY="489.0" prefHeight="16.0" prefWidth="300.0" textFill="RED" AnchorPane.rightAnchor="150.0">
-               <font>
-                  <Font name="Poppins Light" size="15.0" />
-               </font>
-            </Label>
             <JFXButton fx:id="btnExit" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="1000.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnExit_OnAction" prefHeight="15.0" prefWidth="15.0" styleClass="buton" stylesheets="@../Resources/css/MainStyle.css" text=" " AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0">
                <graphic>
                   <FontAwesomeIconView glyphName="REMOVE" size="20" styleClass="glyph-red" />
                </graphic></JFXButton>
+            <GridPane layoutX="20.0" layoutY="30.0" prefHeight="556.0" prefWidth="996.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="30.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Separator orientation="VERTICAL" prefHeight="472.0" prefWidth="3.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <JFXButton fx:id="btnLogin" buttonType="RAISED" layoutX="115.0" layoutY="277.0" onAction="#btnLogin_OnAction" prefHeight="32.0" prefWidth="300.0" stylesheets="@../Resources/css/MainStyle.css" text="Login" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="246.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="83.0">
+                           <font>
+                              <Font name="Poppins Light" size="15.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="buton" />
+                              <String fx:value="buton-delete" />
+                           </styleClass>
+                        </JFXButton>
+                        <JFXPasswordField fx:id="txtPassword" focusColor="#097541" labelFloat="true" layoutX="115.0" layoutY="215.0" onAction="#txtPassword_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="Password" styleClass="jfx-text-field-white" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE" AnchorPane.bottomAnchor="308.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="83.0">
+                           <font>
+                              <Font name="Poppins Light" size="15.0" />
+                           </font>
+                        </JFXPasswordField>
+                        <JFXTextField fx:id="txtUserName" focusColor="#097541" labelFloat="true" layoutX="115.0" layoutY="157.0" onAction="#txtUserName_OnAction" prefHeight="26.0" prefWidth="300.0" promptText="User Name" styleClass="jfx-text-field-white" stylesheets="@../Resources/css/MainStyle.css" unFocusColor="WHITE" AnchorPane.bottomAnchor="366.0" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="83.0">
+                           <font>
+                              <Font name="Poppins Light" size="15.0" />
+                           </font>
+                        </JFXTextField>
+                        <FontAwesomeIconView fill="#455a64" glyphName="KEY" layoutX="82.0" layoutY="238.0" size="20" styleClass="slid-menu-glyph-icon" AnchorPane.bottomAnchor="314.7522315979004" AnchorPane.leftAnchor="82.0" />
+                        <FontAwesomeIconView fill="#455a64" glyphName="USER" layoutX="84.0" layoutY="180.0" size="20" styleClass="slid-menu-glyph-icon" AnchorPane.bottomAnchor="372.7522315979004" AnchorPane.leftAnchor="84.0" />
+                        <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="342.0" prefHeight="23.0" prefWidth="468.0" textFill="RED" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                           <font>
+                              <Font name="Poppins Light" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="8.0" layoutY="287.0" prefHeight="72.0" prefWidth="468.0" text="Company Name" textFill="WHITE" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+                           <font>
+                              <Font name="Poppins Medium" size="50.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIconView glyphName="DIAMOND" size="200" styleClass="slid-menu-glyph-icon" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </GridPane>
          </children>
          <StackPane.margin>
             <Insets />

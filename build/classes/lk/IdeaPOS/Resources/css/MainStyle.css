@@ -128,7 +128,7 @@ Dashboard Css
 
 /*table view */
 .table-view{
-    -fx-background-color: #353b48;
+    -fx-background-color: #f0f0f0;
 }
 .table-view .column-header,
 .table-view .column-header-background .filler {
@@ -140,18 +140,28 @@ Dashboard Css
     -fx-alignment: CENTER;
 }
 .table-row-cell:odd{
-    -fx-background-color: #353b48;
+    -fx-background-color: #f0f0f0;
 }
 .table-row-cell:even{
-    -fx-background-color: #2f3640;
+    -fx-background-color: #FFFFFF;
 }
 .table-row-cell:selected{
-    -fx-background-color: #2980b9;
+    -fx-background-color: #3498db;
 }
 .table-view .cell{
     -fx-font-family:Poppins Light;
     -fx-font-size:15px;
     -fx-alignment: CENTER;
-    -fx-text-fill: #dcdde1;
+    -fx-text-fill: #000000;
     -fx-border-color: transparent;
+}
+.progress-bar > .bar{
+    -fx-background-color: #007ACC; /*linear-gradient(
+        from 0px .75em to .75em 0px,
+        repeat,
+        -fx-accent 0%,
+        -fx-accent 49%,
+        derive(-fx-accent, 30%) 50%,
+        derive(-fx-accent, 30%) 99%
+    );*/
 }
