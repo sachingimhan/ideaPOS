@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Properties;
 import javax.swing.JOptionPane;
 import lk.IdeaPOS.Model.DatabaseSetting;
-import lk.IdeaPOS.Util.MessageBox;
+import org.w3c.tools.codec.Base64Encoder;
 
 /**
  *
@@ -35,7 +35,7 @@ public class frmDbConfigController {
                 Properties properties = new Properties();
                 properties.setProperty("db.Host", setting.getHost());
                 properties.setProperty("db.User", setting.getUser());
-                properties.setProperty("db.Pass", setting.getPasswd());
+                properties.setProperty("db.Pass", new Base64Encoder(setting.getPasswd()).processString());
                 properties.setProperty("db.Port", setting.getPort());
                 properties.setProperty("db.DbName", setting.getDbName());
                 properties.setProperty("db.backupPath", setting.getBackupPath());

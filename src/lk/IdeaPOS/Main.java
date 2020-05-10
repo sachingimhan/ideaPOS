@@ -15,7 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lk.IdeaPOS.Util.MessageBox;
 import org.apache.log4j.BasicConfigurator;
 
 /**

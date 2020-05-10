@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/root/NetBeansProjects/IdeaPOS/src/lk/IdeaPOS/Main.java</file>
+            <file>file:/root/NetBeansProjects/IdeaPOS/src/lk/IdeaPOS/Util/DBUtil.java</file>
             <file>file:/root/NetBeansProjects/IdeaPOS/src/lk/IdeaPOS/Resources/css/MainStyle.css</file>
             <file>file:/root/NetBeansProjects/IdeaPOS/src/lk/IdeaPOS/Controllers/DashboardController.java</file>
+            <file>file:/root/NetBeansProjects/IdeaPOS/src/lk/IdeaPOS/Controllers/DsicountItemController.java</file>
+            <file>file:/root/NetBeansProjects/IdeaPOS/src/lk/IdeaPOS/Controllers/SettingsController.java</file>
         </group>
     </open-files>
 </project-private>

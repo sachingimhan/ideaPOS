@@ -14,7 +14,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lk.IdeaPOS.Model.DatabaseSetting;
+import org.w3c.tools.codec.Base64Decoder;
+import org.w3c.tools.codec.Base64FormatException;
 
 /**
  *
@@ -55,14 +59,14 @@ public class DBUtil {
                 return new DatabaseSetting(
                         p.getProperty("db.Host"),
                         p.getProperty("db.User"),
-                        p.getProperty("db.Pass"),
+                        new Base64Decoder(p.getProperty("db.Pass")).processString(),
                         p.getProperty("db.Port"),
                         p.getProperty("db.DbName")
                 );
             } else {
                 MessageBox.showErrorMessage("Database Configuratin Not Found", "Error");
             }
-        } catch (IOException ex) {
+        } catch (IOException | Base64FormatException ex) {
             MessageBox.showErrorMessage(ex.getLocalizedMessage(), "Error");
         }
         return null;
